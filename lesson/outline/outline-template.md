@@ -52,7 +52,7 @@ Check out the [content standards](http://curriculum-documentation.codecademy.com
 
 1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky user experience. 
 
-2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser while the application asynchronously fetches data in the background, which is eventually inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
+2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
 
 3. React Router is the most popular solution for implementing routing in single page React applications. The library provides a few simple tools for displaying different components to the user based on the URLs they visit. 
 
@@ -67,7 +67,7 @@ A table comparing single and multi-page architecture – how routing works in e
 
 <hr>
 
-## Exercise # 2: _Installing and importing `BrowserRouter` from 'react-router-dom'_
+## Exercise # 2: _Installing 'react-router-dom'_ and importing `BrowserRouter` 
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -78,20 +78,32 @@ A table comparing single and multi-page architecture – how routing works in e
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
 1. In order to use React Router, you will need to include the `react-router-dom` package (the version of React Router built specifically for web browsers) in your project. [Link to docs](https://www.npmjs.com/package/react-router-dom)
 
-2. Once you have added the package to your project, you will need to import `BrowserRouter`. BrowserRouter is the top-level component responsible for containing routing logic. Talk about React Router philosophy here – declarative and dynamic. Whereas other routing paradigms are static (eg. routes are predefined prior to and separate from the process of rendering), React Router requires us to render the routes themslves. Routers and the Routes they contain are components just like any other...demystify RR components so that learners don't think there's anything *special* about them. 
+2. Once you have added the package to your project, you will need to import `BrowserRouter`. BrowserRouter is the top-level component responsible for containing routing logic. React Router provides several routers (the differences between them and the reasons you might choose one over the other are outside the scope of this lesson, but you can read more about that [here](https://reactrouter.com/web/api/BrowserRouter)), and it is common to alias them to `<Router>` for the sake of simplicity and readability. You can alias `BrowserRouter` like so:
 
-3. Go into a little bit more detail about what happens when you render a router as the top-level component. 
+```js
+import { BrowserRouter as Router} from ‘react-router-dom’
+```
+ 
+3. Talk about [React Router's philosophy](https://reactrouter.com/web/guides/philosophy) here – declarative and dynamic. Whereas other routing paradigms are static (eg. routes are predefined prior to and separate from the process of rendering), React Router requires us to render the routes themslves. Routers and the Routes they contain are components just like any other (demystify RR components so that learners don't think there's anything special about them). 
+
+4. To add routing to your app, you will need to render a Router as the top level component. 
+```js
+ReactDom.render(<Router><App /></Router>)
+```
+5. Go into a little bit more detail about what happens when you render a router, eg. just like in the rest of React, parent components (in this case, Router) pass their props to child components. Making `<Router>` the top-level component ensures you can use the router's functionality from anywhere within your app.
+
+
 
 ### Checkpoints Summary
 
-1. Import BrowserRouter as Router in App.js.
-2. Render a Router as the top-level app component. 
+1. Import BrowserRouter as Router in index.js.
+2. Render a Router as the top-level component of your app. 
 
 #### What is the purpose of these checkpoints?
 The learner should be able to import a router and render it as the top-level app component.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
-A code editor containing a React app with App.js open. 
+A code editor containing a React app with index.js open. 
 
 <hr>
 
@@ -99,12 +111,24 @@ A code editor containing a React app with App.js open.
 
 ### Which course outcomes will be covered by this exercise?
 
-1. Learners will be able to...
+1. Learners will be able to create routes.
 
 ### Narrative Summary
 
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
+1. Now that you've created a router, you need to create the routes themselves. Remember, in React Router everything is a component. To add routes to an app, you need to render the `Route` component by nesting it inside a `Router. 
+2. First import the `Route` component from the `react-router-dom` package.
 
+```js
+import { BrowserRouter as Router, Route } from `react-router-dom`
+```
+
+4. Next, render a `Route` inside your `Router`. The `Route` component's function is simple: to render its children when the current URL path matches the value of its `path` prop. For example, the following route renders the `AboutMe` component when the URL path matches `'about-me'`.
+
+```js
+<Route path="about-me">
+  <AboutMe />
+</Route>
+```
 
 
 ### Checkpoints Summary
