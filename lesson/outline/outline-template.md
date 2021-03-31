@@ -133,7 +133,7 @@ To ensure that the learner knows how to add routes to an application and how to 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
 Code editor with index.js open and a web browser
 
-## Exercise # 6: _Linking to routes_
+## Exercise # 5: _Linking to routes_
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -156,32 +156,34 @@ _TODO example_
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
 
-1. Checkpoint one
-2. Checkpoint two
+1. The learner will import `Link` from RR and create a series of `Link` components. 
+2. The learner will import `NavLink` from RR and create a series of `NavLink` components.
 
 #### What is the purpose of these checkpoints?
-
+To ensure the learner knows how to import and use `Link` and `NavLink`.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
 
-## Exercise # 7: _Dynamic routes_
+## Exercise # 6: _Dynamic routes_
 
 ### Which course outcomes will be covered by this exercise?
 
 1. Learners will be able to create dyamic routes
 
 ### Narrative Summary
-1. So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a social networking site in which every user has a profile accessible at the path (`'/users/'` + USER_ID). There is no way for us to specify a route for each unique user ID without knowing every single one, nor should we because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level so that a route will match any path of the form `'/users/'` + USER_ID. 
-2. React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/users/:userId'`, `:userId` is dynamic: `'/users/1'` should display the user with id 1, and `'/users/2'` should display the user with id 2.
+1. So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a news site in which every article has is accessible at the path (`'/articles/'` + title). There is no way for us to specify a route for each unique article without knowing every single title, nor should we specify a unique route for every article because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level with a route will match any path of the form `'/artciles/'` + title. 
+2. React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/articles/:title'`, `:title` is dynamic: `'/articles/article-one'` should display the user with title `'article-one'` and `'/articles/article-two'` should display the user with title `'article-two`. A URL can have many dynamic segments or none.
+3. To create a dynamic route, simply provide a `path` prop that includes a dynamic segment. _walk through creating a route for a user profile that renders a user profile page_ Now, when we navigate to `'/articles/:title`, an `Article` component will be rendered.  
+4. It is common to use URL parameters to retrieve and/or display data in the component that a dynamic route renders. For example, our `Article` component might need to display the title of the current article. _Walk through the `useParams` API and show it in context by displaying the article title in the article component_
 
 ### Checkpoints Summary
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
 
-1. Checkpoint one
-2. Checkpoint two
+1. The learner will create dynamic route and test that it works by navigating to a route that matches.
+2. The learner will import and use the `useParams` hook to get the value of the route param and display it on the page.
 
 #### What is the purpose of these checkpoints?
 
@@ -191,7 +193,7 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
 
 
-## Exercise # 5: Switch / exact
+## Exercise #7: Switch / exact
 
 ### Which course outcomes will be covered by this exercise?
 
