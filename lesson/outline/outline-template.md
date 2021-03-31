@@ -30,7 +30,7 @@ Check out the [content standards](http://curriculum-documentation.codecademy.com
 
 ### Narrative Summary
 
-1. In this lesson, you will learn about routing–the process by which a web application determines what content to show a user based on the URL that user is visiting–as well as React Router–a popular tool for adding routing to React applications. 
+1. In this lesson, you will learn about routing–the process by which a web application determines what content to show a user based on the current URL–as well as React Router–a popular tool for adding routing to React applications. 
 
 2. Routing is powerful because it allows you to organize an application's views. By allowing you to display only what the user has specifically requested to see, routing enables rich, engaging, and clear user experiences. 
 
@@ -42,7 +42,7 @@ Check out the [content standards](http://curriculum-documentation.codecademy.com
 
 <hr>
 
-## Exercise # 1.5: Single vs. Multi-Page Architecture
+## Exercise # 2: Single vs. Multi-Page Architecture
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -67,7 +67,7 @@ A table comparing single and multi-page architecture – how routing works in e
 
 <hr>
 
-## Exercise # 2: _Installing 'react-router-dom'_ and importing `BrowserRouter` 
+## Exercise # 3: _Installing `react-router-dom` and importing `BrowserRouter` 
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -75,23 +75,18 @@ A table comparing single and multi-page architecture – how routing works in e
 
 ### Narrative Summary
 
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
 1. In order to use React Router, you will need to include the `react-router-dom` package (the version of React Router built specifically for web browsers) in your project. [Link to docs](https://www.npmjs.com/package/react-router-dom)
-
 2. Once you have added the package to your project, you will need to import `BrowserRouter`. BrowserRouter is the top-level component responsible for containing routing logic. React Router provides several routers (the differences between them and the reasons you might choose one over the other are outside the scope of this lesson, but you can read more about that [here](https://reactrouter.com/web/api/BrowserRouter)), and it is common to alias them to `<Router>` for the sake of simplicity and readability. You can alias `BrowserRouter` like so:
-
 ```js
 import { BrowserRouter as Router} from ‘react-router-dom’
 ```
- 
-3. Talk about [React Router's philosophy](https://reactrouter.com/web/guides/philosophy) here – declarative and dynamic. Whereas other routing paradigms are static (eg. routes are predefined prior to and separate from the process of rendering), React Router requires us to render the routes themslves. Routers and the Routes they contain are components just like any other (demystify RR components so that learners don't think there's anything special about them). 
-
+3. Talk about [React Router's philosophy](https://reactrouter.com/web/guides/philosophy) – declarative and dynamic. Whereas other routing paradigms are static (eg. routes are predefined prior to and separate from the process of rendering), React Router requires us to render the routes themslves. Routers and the Routes they contain are components just like any other (demystify RR components so that learners don't think there's anything special about them). 
 4. To add routing to your app, you will need to render a Router as the top level component. 
 ```js
-ReactDom.render(<Router><App /></Router>)
+ReactDom.render(<Router><App /></Router>, document.getElementById('root'))
 ```
 5. Go into a little bit more detail about what happens when you render a router, eg. just like in the rest of React, parent components (in this case, Router) pass their props to child components. Making `<Router>` the top-level component ensures you can use the router's functionality from anywhere within your app.
-
+6. Talk about the [html5 history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API).
 
 
 ### Checkpoints Summary
@@ -107,7 +102,7 @@ A code editor containing a React app with index.js open.
 
 <hr>
 
-## Exercise # 3: _Basic routing with `<Route>`_
+## Exercise # 4: _Basic routing with `<Route>`_
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -115,20 +110,75 @@ A code editor containing a React app with index.js open.
 
 ### Narrative Summary
 
-1. Now that you've created a router, you need to create the routes themselves. Remember, in React Router everything is a component. To add routes to an app, you need to render the `Route` component by nesting it inside a `Router. 
-2. First import the `Route` component from the `react-router-dom` package.
-
+1. Once you've created a router, you'll need to create the routes themselves. Remember, in React Router everything is a component. To add a route to an app, you need to render a `Route` component by nesting it inside a `Router`.
+2. First, you'll have to import the `Route` component from the `react-router-dom` package.
 ```js
 import { BrowserRouter as Router, Route } from `react-router-dom`
 ```
-
-4. Next, render a `Route` inside your `Router`. The `Route` component's function is simple: to render its children when the current URL path matches the value of its `path` prop. For example, the following route renders the `AboutMe` component when the URL path matches `'about-me'`.
-
+3. Next, render a `Route` inside your `Router`. The `Route` component's function is simple: to render its children when the current URL path matches the value of its `path` prop. For example, the following route renders the `About` component when the URL path matches `'about'`.
 ```js
-<Route path="about-me">
-  <AboutMe />
+<Route path="about">
+  <About />
 </Route>
 ```
+4. Now, navigating to "/about" will cause the URL path to match the route's `path` prop, and the `About` component will render.
+5. If your router includes a `Route` with no `path` prop, then that route will always match. You can leverage this fact to make your applications render components that you want your user to see regardless of the current route by including those components as children of a route with no `path` prop. 
+
+### Checkpoints Summary
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
+
+1. The learner will add a route to an empty router
+2. The learner will navigate to the route's path using the URL bar to test that their code works.
+
+#### What is the purpose of these checkpoints?
+To ensure that the learner knows how to add routes to an application and how to test that those routes are working as expected.
+
+### What would you like to have in the workspace for this exercise? Share your plan below.
+Code editor with index.js open and a web browser
+
+## Exercise # 6: _Linking to routes_
+
+### Which course outcomes will be covered by this exercise?
+
+1. Learners will be able to link to routes and articulate why they should use `Link` instead of an `a` tag.
+
+### Narrative Summary
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
+1. In the last exercise, you used the URL bar to navigate to a path that matched one of your application's routes. But how do you navigate from within the app itself? React Router provides a `Link` component for doing just that.
+2. To create a link to a particular route, render a `Link` component and set its `to` prop equal to the location to which the link should navigate. The simplest way to specify this location is as a string: 
+```js
+ <Link to='/about' /> 
+```
+3. However, RR also allows you to provide this location as a function or object, which can be useful if you need to programatically generate the location. 
+_TODO example_
+4. Why should use `Link` instead of the native `a` tag? RR's `Link` component wraps the native `a` tag you are familiar with, but prevents its default behavior (navigating to the specified path and causing a page reload – the very thing we are trying to avoid with front-end routing). Internally, `Link` uses the Router's `history` prop (accessible to all of the Router's chidren) to change the URL path – this causes the corresponding route to match and that Route's children to display on the page.
+5. In addition to providing the `Link` component, RR provides `NavLink` – a special type of link that displays differently depending on whether or not the current URL path matches the `NavLink`'s `to` prop. These can be quite useful for constructing navigation menus, as they clearly differenciate between active and inactive content.  
+
+### Checkpoints Summary
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
+
+1. Checkpoint one
+2. Checkpoint two
+
+#### What is the purpose of these checkpoints?
+
+
+### What would you like to have in the workspace for this exercise? Share your plan below.
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
+
+## Exercise # 7: _Dynamic routes_
+
+### Which course outcomes will be covered by this exercise?
+
+1. Learners will be able to...
+
+### Narrative Summary
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
 
 
 ### Checkpoints Summary
@@ -141,12 +191,40 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 #### What is the purpose of these checkpoints?
 
 
+### What would you like to have in the workspace for this exercise? Share your plan below.
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
+
+
+## Exercise # 5: Switch / exact
+
+### Which course outcomes will be covered by this exercise?
+
+1. Learners will be able to reason about when to use `Switch` and/or `exact` to achieve their desired routing outcomes.
+
+### Narrative Summary
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
+
+1. By design, a `Router` will render _all_ the `Routes` whose paths match the current URL. This can 
+2. 
+
+### Checkpoints Summary
+
+_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
+
+1. Checkpoint one
+2. Checkpoint two
+
+#### What is the purpose of these checkpoints?
+
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
 
-## Exercise # 4: _Linking to routes_
+
+## Exercise # 8: _Nested routes_
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -173,7 +251,7 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
 
-## Exercise # 5: _Dynamic routes_
+## Exercise # 9: _Redirects_
 
 ### Which course outcomes will be covered by this exercise?
 
@@ -200,61 +278,7 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
 
-## Exercise # 6: _Nested routes_
-
-### Which course outcomes will be covered by this exercise?
-
-1. Learners will be able to...
-
-### Narrative Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
-
-
-### Checkpoints Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
-1. Checkpoint one
-2. Checkpoint two
-
-#### What is the purpose of these checkpoints?
-
-
-
-### What would you like to have in the workspace for this exercise? Share your plan below.
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
-
-## Exercise # 7: _Redirects_
-
-### Which course outcomes will be covered by this exercise?
-
-1. Learners will be able to...
-
-### Narrative Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
-
-
-### Checkpoints Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
-1. Checkpoint one
-2. Checkpoint two
-
-#### What is the purpose of these checkpoints?
-
-
-
-### What would you like to have in the workspace for this exercise? Share your plan below.
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
-
-## Exercise # 8: _`useHistory` and the history API_
+## Exercise # 10: _`useHistory` and the history API_
 
 ### Which course outcomes will be covered by this exercise?
 
