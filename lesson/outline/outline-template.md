@@ -49,7 +49,7 @@ A diagram of URL structure – protocol/domain/path.
 ### Narrative Summary
 
 1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky experience. 
-2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
+2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
 3. React Router is the most popular solution for implementing routing in single page React applications. The library provides a few simple tools for displaying different components to the user based on the URLs they visit. 
 
 ### Checkpoints Summary
@@ -230,7 +230,8 @@ _show the same example with routes reversed, explain that now you will never be 
    <Home />
  </Route>
  ```
- 7. Now, when a user visits '/', the `Home` component will render. But when a user visits '/sign-up', only the second route will match and only the `SignUp` component will render.  
+7. Now, when a user visits '/', the `Home` component will render. But when a user visits '/sign-up', only the second route will match and only the `SignUp` component will render.  
+8. Talk about `strict` and `sensitive` here? I rarely find that these are necessary, so I would probaby recommend just pointing learners to the docs at this point.
 
 ### Checkpoints Summary
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
@@ -246,23 +247,68 @@ Code editor and web browser.
 
 ### Which course outcomes will be covered by this exercise?
 
-1. Learners will be able to...
+1. Learners will be able to build nested routers.
 
 ### Narrative Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
-
+1. Up to this point, we have been working with routers that are small enough to be rendered entirely in a single file. But as an application grows in scope, it can be useful to render routes from multiple components. This allows us to locate routing logic near the related UI logic – you can imagine that on large code bases, it can be advantageous to have code organized this way. Splitting Routes up this way also makes an application more lighhtweight – if a user never navigates to a part of the appication that necessitates a route to render, then it never will.
+2. Let's return to our newspaper example, and imagine that the engineering team is building out a `Topics` feature that will organize news articles by their category – world news, U.S. news, etc. In addition to a `Categories` component (which will render links to each indiviual category), the team has created a `Category` view that will display all the articles for a given category. Previously, we might have written a router like this:
+```js
+<Switch>
+   <Route path='/categories/:categoryName'>
+    <Category />
+   </Route>
+   <Route path='/categories'>
+    <Categories />
+   </Route>
+</Switch>
+```
+3. There's nothing wrong with this way of routing, but as soon as your start to introduce more features into your application, may find that having all the routes contained in a single router becomes a bit unweildly _show a router with articles/categories/log in/etc_. The way around this is to get comfortable rendering routes from components elsewhere in your app.
+4. For example, consider this `Categories` component, which iterates through a list of categories and links to each:
+```js
+function Categories ({ categories }) {
+  return (
+    <ul>
+      { 
+        categories.map(c => 
+          <li>
+            <Link to={`categories/${c.name}`}>{c.name}</Link>
+          </li>
+        )
+      }
+     </ul>
+  )
+}
+```
+5. Clicking on that a link rendered in this component will cause the URL to change; it will match the route from our previously defined router. But note that from inside this component, we have no way of knowing what component will be rendered when the URL updates.
+6. Because RR handles routing dynamically (eg. routes exist when they are rendered), you can relocate the route to the componets in which they are relevant.
+```js
+function Categories ({ categories }) {
+  return (
+    <div>
+      <ul>
+        { 
+          categories.map(c => 
+            <li>
+              <Link to={`categories/${c.name}`}>{c.name}</Link>
+            </li>
+          )
+        }
+       </ul>
+       <Route path='categories/:categoryName'>
+        <Category />
+       </Route>
+     </div>
+  )
+}
+``` 
+7. Rewriting your routes this way makes it very obvious what will happen.
+8. _TO DO iterate on the above example using `match` `path` and `url` to clean up and generalize_
 ### Checkpoints Summary
-
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
-1. Checkpoint one
-2. Checkpoint two
+1. Learner will be given a router with lots of top level routes and practice nesting them in the appropriate components.
 
 #### What is the purpose of these checkpoints?
-
-
+To make sure that learners understand how to nest routes and can refactor routers by nesting routes where appropriate.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
 
