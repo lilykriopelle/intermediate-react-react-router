@@ -48,7 +48,9 @@ A diagram of URL structure – protocol/domain/path.
 
 ### Narrative Summary
 
-1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky user experience. 
+1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky 
+
+experience. 
 2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
 3. React Router is the most popular solution for implementing routing in single page React applications. The library provides a few simple tools for displaying different components to the user based on the URLs they visit. 
 
@@ -174,8 +176,8 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 
 ### Narrative Summary
 1. So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a news site in which every article has is accessible at the path (`'/articles/'` + title). There is no way for us to specify a route for each unique article without knowing every single title, nor should we specify a unique route for every article because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level with a route will match any path of the form `'/artciles/'` + title. 
-2. React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/articles/:title'`, `:title` is dynamic: `'/articles/article-one'` should display the user with title `'article-one'` and `'/articles/article-two'` should display the user with title `'article-two`. A URL can have many dynamic segments or none.
-3. To create a dynamic route, simply provide a `path` prop that includes a dynamic segment. _walk through creating a route for a user profile that renders a user profile page_ Now, when we navigate to `'/articles/:title`, an `Article` component will be rendered.  
+2. React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/articles/:title'`, `:title` is dynamic: `'/articles/article-one'` should display the article with title `'article-one'` and `'/articles/article-two'` should display the article with title `'article-two`. A URL can have multiple dynamic segments (eg. `'/articles/:title/comments/:commentId'`) or none (eg. `'articles'`).
+3. To create a dynamic route, simply provide a `path` prop that includes a dynamic segment. _walk through creating a route for an article page that renders a single article Now, when we navigate to `'/articles/:title`, an `Article` component will be rendered.  
 4. It is common to use URL parameters to retrieve and/or display data in the component that a dynamic route renders. For example, our `Article` component might need to display the title of the current article. _Walk through the `useParams` API and show it in context by displaying the article title in the article component_
 
 ### Checkpoints Summary
@@ -186,12 +188,11 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 2. The learner will import and use the `useParams` hook to get the value of the route param and display it on the page.
 
 #### What is the purpose of these checkpoints?
-
+Learners will be able to write dynamic routes, reason about what URLs will match a route's `path`, and be able to use `useParams` to get the value of route params from within a component.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
-
 
 ## Exercise #7: Switch / exact
 
@@ -203,8 +204,25 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
 
-1. By design, a `Router` will render _all_ the `Routes` whose paths match the current URL. This can 
-2. 
+1. By design, a `Router` will render _all_ the `Routes` whose paths match the current URL. This allows us to compose layouts in which multiple components should appear or disappear based on the current URL (for example, an application in which the sidebar and main display respond to changes in the current URL). But sometimes, this design choice can produce unintended results. Consider the following (relatively common) setup:
+```js
+<Router>
+  <div>
+     <Route path='articles/new'>
+      <NewArticle />
+     </Route>
+    <Route path='articles/:title'>
+      <Article />
+     </Route>
+  </div>
+</Router>
+```
+2. What should happen when the user navigates to `'articles/new'`? The `NewArticle` component should appear. But what actually happens when the user navigates to that URL is that _both_ routes match – the first route's `path` prop matches exactly, and the second route will match `new` to the URL parameter `:title`. Because both routes match, the application will render the `NewArticle` component and the `Article` component.  
+3. RR provides two tools for resolving this collisions to prevent unintended rendering. The first is the `Switch` component. When wrapped around a collection of routes, `Switch` will render the first route that matches the current URL. Instead of rendering all the routes whose `path` prop patches the current URL, the the `Switch` component stops checking paths as soon as it finds a `Route` that matches. 
+_show earlier example wrapped in `Switch` component, walk through what happens when you visit 'articles/new' vs 'articles/title-one'_
+4. Because the `Switch` checks routes sequentially, the order in which Routes are rendered matters. 
+_show same example with routes reversed, explain that now you will never be able to render the `NewArticle` component since the `Switch` will always render the first Route that matches the current URL_  
+5. RR provides another tool, the `exact` prop on the `Route` component, for preventing Routes from rendering incorrectly. The exact 
 
 ### Checkpoints Summary
 
