@@ -301,7 +301,7 @@ function Categories ({ categories }) {
   )
 }
 ``` 
-7. Rewriting your routes this way makes it very obvious what will happen.
+7. Rewriting your routes this way makes it very obvious what will happen when the user clicks on a link.
 8. _TO DO iterate on the above example using `match` `path` and `url` to clean up and generalize_
 ### Checkpoints Summary
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
@@ -314,17 +314,18 @@ To make sure that learners understand how to nest routes and can refactor router
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
 
-## Exercise # 9: _Redirects_
+## Exercise # 9: _Redirect_ and _useHistory_
 
 ### Which course outcomes will be covered by this exercise?
 
-1. Learners will be able to...
+1. Learners will be able to use RR's `Redirect` component.
 
 ### Narrative Summary
 
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
-
+1. If you take anything away from this lesson, it should be that RR treats everything as a component. To get fully comfortable using RR in your code, you have to embrace this idea and the declarative coding style that follows from it. For the most part, this is pretty intuitive, but it can feel a bit counterintuitive when it comes to redirecting users.
+2. Consider a common case for redirecting a user: a user wants to access a page that requires authentication, but is not currently signed in.
+3. Walk through the declarative way to to accomplish redirect: the component receives a boolean prop signifying whether the user is logged in and the component renders a `Redirect` if they are not.
+4. Compare that to an imperative redirect. Eg. after a form form is submitted, redirect using `history.push`. It's possible to do this declaratively (add state to the component that updates when the form is submitted, use this state to conditionally render a `Redirect`), but adding that state introduces additional complexity, so being imperative might be fine in this instance. _NOTE: I would be interested in discussing this with John. My personal preference is to avoid adding state purely for the purpose of being able to do declarative redirects, but people have *feelings* about stylistic consistency, so..._
 
 ### Checkpoints Summary
 
