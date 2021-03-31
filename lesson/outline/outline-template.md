@@ -31,14 +31,12 @@ Check out the [content standards](http://curriculum-documentation.codecademy.com
 ### Narrative Summary
 
 1. In this lesson, you will learn about routing–the process by which a web application determines what content to show a user based on the current URL–as well as React Router–a popular tool for adding routing to React applications. 
-
 2. Routing is powerful because it allows you to organize an application's views. By allowing you to display only what the user has specifically requested to see, routing enables rich, engaging, and clear user experiences. 
+3. Walk through the basics of URL structure – protocol/domain/path.
+4. Walk the learner through the URL of the page displaying this exercise to drive the point home, eg. "Codeacdemy has lots of exercises, but you're currently looking at this one. How did we decide which exercise to show you?", and then break down the URL. The content you see is determined by the URL that you're visiting. 
 
-3. Walk the learner through the URL of the page displaying this exercise to drive the point home, eg. "Codeacdemy has lots of exercises, but you're currently looking at this one. How did we decide which exercise to show you?", and then break down the URL. The content you see is determined by the URL that you're visiting. 
-
-### Checkpoints Summary
-#### What is the purpose of these checkpoints?
 ### What would you like to have in the workspace for this exercise? Share your plan below.
+A diagram of URL structure – protocol/domain/path.
 
 <hr>
 
@@ -51,9 +49,7 @@ Check out the [content standards](http://curriculum-documentation.codecademy.com
 ### Narrative Summary
 
 1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky user experience. 
-
 2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
-
 3. React Router is the most popular solution for implementing routing in single page React applications. The library provides a few simple tools for displaying different components to the user based on the URLs they visit. 
 
 ### Checkpoints Summary
@@ -85,7 +81,7 @@ import { BrowserRouter as Router} from ‘react-router-dom’
 ```js
 ReactDom.render(<Router><App /></Router>, document.getElementById('root'))
 ```
-5. Go into a little bit more detail about what happens when you render a router, eg. just like in the rest of React, parent components (in this case, Router) pass their props to child components. Making `<Router>` the top-level component ensures you can use the router's functionality from anywhere within your app.
+5. Go into a little bit more detail about what happens when you render a router, eg. just like in the rest of React, parent components (in this case, Router) pass their props to child components. Making `<Router>` the top-level component ensures you can use the router's history from anywhere within your app.
 6. Talk about the [html5 history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API).
 
 
@@ -153,8 +149,8 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 ```
 3. However, RR also allows you to provide this location as a function or object, which can be useful if you need to programatically generate the location. 
 _TODO example_
-4. Why should use `Link` instead of the native `a` tag? RR's `Link` component wraps the native `a` tag you are familiar with, but prevents its default behavior (navigating to the specified path and causing a page reload – the very thing we are trying to avoid with front-end routing). Internally, `Link` uses the Router's `history` prop (accessible to all of the Router's chidren) to change the URL path – this causes the corresponding route to match and that Route's children to display on the page.
-5. In addition to providing the `Link` component, RR provides `NavLink` – a special type of link that displays differently depending on whether or not the current URL path matches the `NavLink`'s `to` prop. These can be quite useful for constructing navigation menus, as they clearly differenciate between active and inactive content.  
+4. Why should use `Link` instead of the native `a` tag? RR's `Link` component wraps the native `a` tag you are familiar with, but prevents its default behavior (navigating to the specified path and causing a page reload – the very thing we are trying to avoid with front-end routing). Internally, `Link` uses the Router's `history` prop (accessible to all of the Router's chidren) to change the URL path. When the URL path changes, the corresponding `Route` renders and that route's children display on the page.
+5. In addition to providing the `Link` component, RR provides `NavLink` – a special type of link that displays differently depending on whether or not the current URL path matches the `NavLink`'s `to` prop. These can be quite useful for building navigation menus, as they differentiate between active and inactive content, enabling a user to quickly see which contet they are viewing.  
 
 ### Checkpoints Summary
 
@@ -174,12 +170,11 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 
 ### Which course outcomes will be covered by this exercise?
 
-1. Learners will be able to...
+1. Learners will be able to create dyamic routes
 
 ### Narrative Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
+1. So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a social networking site in which every user has a profile accessible at the path (`'/users/'` + USER_ID). There is no way for us to specify a route for each unique user ID without knowing every single one, nor should we because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level so that a route will match any path of the form `'/users/'` + USER_ID. 
+2. React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/users/:userId'`, `:userId` is dynamic: `'/users/1'` should display the user with id 1, and `'/users/2'` should display the user with id 2.
 
 ### Checkpoints Summary
 
