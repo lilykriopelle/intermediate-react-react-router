@@ -48,9 +48,7 @@ A diagram of URL structure – protocol/domain/path.
 
 ### Narrative Summary
 
-1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky 
-
-experience. 
+1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky experience. 
 2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
 3. React Router is the most popular solution for implementing routing in single page React applications. The library provides a few simple tools for displaying different components to the user based on the URLs they visit. 
 
@@ -68,11 +66,9 @@ A table comparing single and multi-page architecture – how routing works in e
 ## Exercise # 3: _Installing `react-router-dom` and importing `BrowserRouter` 
 
 ### Which course outcomes will be covered by this exercise?
-
 1. Learners will be able to add React Router to their projects and import the `BrowserRouter` component.
 
 ### Narrative Summary
-
 1. In order to use React Router, you will need to include the `react-router-dom` package (the version of React Router built specifically for web browsers) in your project. [Link to docs](https://www.npmjs.com/package/react-router-dom)
 2. Once you have added the package to your project, you will need to import `BrowserRouter`. BrowserRouter is the top-level component responsible for containing routing logic. React Router provides several routers (the differences between them and the reasons you might choose one over the other are outside the scope of this lesson, but you can read more about that [here](https://reactrouter.com/web/api/BrowserRouter)), and it is common to alias them to `<Router>` for the sake of simplicity and readability. You can alias `BrowserRouter` like so:
 ```js
@@ -88,7 +84,6 @@ ReactDom.render(<Router><App /></Router>, document.getElementById('root'))
 
 
 ### Checkpoints Summary
-
 1. Import BrowserRouter as Router in index.js.
 2. Render a Router as the top-level component of your app. 
 
@@ -103,7 +98,6 @@ A code editor containing a React app with index.js open.
 ## Exercise # 4: _Basic routing with `<Route>`_
 
 ### Which course outcomes will be covered by this exercise?
-
 1. Learners will be able to create routes.
 
 ### Narrative Summary
@@ -138,11 +132,9 @@ Code editor with index.js open and a web browser
 ## Exercise # 5: _Linking to routes_
 
 ### Which course outcomes will be covered by this exercise?
-
 1. Learners will be able to link to routes and articulate why they should use `Link` instead of an `a` tag.
 
 ### Narrative Summary
-
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
 1. In the last exercise, you used the URL bar to navigate to a path that matched one of your application's routes. But how do you navigate from within the app itself? React Router provides a `Link` component for doing just that.
 2. To create a link to a particular route, render a `Link` component and set its `to` prop equal to the location to which the link should navigate. The simplest way to specify this location is as a string: 
@@ -155,9 +147,6 @@ _TODO example_
 5. In addition to providing the `Link` component, RR provides `NavLink` – a special type of link that displays differently depending on whether or not the current URL path matches the `NavLink`'s `to` prop. These can be quite useful for building navigation menus, as they differentiate between active and inactive content, enabling a user to quickly see which contet they are viewing.  
 
 ### Checkpoints Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
 1. The learner will import `Link` from RR and create a series of `Link` components. 
 2. The learner will import `NavLink` from RR and create a series of `NavLink` components.
 
@@ -165,8 +154,7 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 To ensure the learner knows how to import and use `Link` and `NavLink`.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
+Code editor and web browser.
 
 ## Exercise # 6: _Dynamic routes_
 
@@ -208,36 +196,51 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 ```js
 <Router>
   <div>
-     <Route path='articles/new'>
+     <Route path='/articles/new'>
       <NewArticle />
      </Route>
-    <Route path='articles/:title'>
+    <Route path='/articles/:title'>
       <Article />
+     </Route>
+     <Route path='/articles'>
+      <Articles />
      </Route>
   </div>
 </Router>
 ```
-2. What should happen when the user navigates to `'articles/new'`? The `NewArticle` component should appear. But what actually happens when the user navigates to that URL is that _both_ routes match – the first route's `path` prop matches exactly, and the second route will match `new` to the URL parameter `:title`. Because both routes match, the application will render the `NewArticle` component and the `Article` component.  
-3. RR provides two tools for resolving this collisions to prevent unintended rendering. The first is the `Switch` component. When wrapped around a collection of routes, `Switch` will render the first route that matches the current URL. Instead of rendering all the routes whose `path` prop patches the current URL, the the `Switch` component stops checking paths as soon as it finds a `Route` that matches. 
+2. What should happen when the user navigates to `'articles/new'`? The `NewArticle` component should appear. But what actually happens when the user navigates to that URL is that _all_ routes match – the first route's `path` prop matches exactly, the second route will match `new` to the URL parameter `:title`, and the last route will match because both begin with `/articles`. Because all routes match, the application will render the `NewArticle`, `Article`, and `Articles` components simultaneously.  
+3. RR provides several mechanisms for preventing this sort of unintended rendering. The first is the `Switch` component. When wrapped around a collection of routes, `Switch` will render the first of its child routes whose `path` prop matches the current URL. 
 _show earlier example wrapped in `Switch` component, walk through what happens when you visit 'articles/new' vs 'articles/title-one'_
 4. Because the `Switch` checks routes sequentially, the order in which Routes are rendered matters. 
-_show same example with routes reversed, explain that now you will never be able to render the `NewArticle` component since the `Switch` will always render the first Route that matches the current URL_  
-5. RR provides another tool, the `exact` prop on the `Route` component, for preventing Routes from rendering incorrectly. The exact 
+_show the same example with routes reversed, explain that now you will never be able to render the `NewArticle` component since the `Switch` will always render the first Route that matches the current URL_  
+5. Sometimes you may want to leverage RR's composability and render multiple routes simultaneously (this would prevent you from using a `Switch` component) while also ensuring your router distinguishes between static paths and paths including URL parameters. Consder the following example
+<Router>
+  <div>
+    <Route path='/'>
+      <Home />
+    </Route>
+    <Route path='/sign-up'>
+      <SignUp />
+    </Route>
+  </div>
+</Router>
+6. Any path will match first route, so the the `Home` component will be rendered whether the user is at '/' or '/sign-up'. _talk a little bit about why this can be useful, eg. for making sure that layout components, menus and such, dislplay no matter what_ But what if you only want the `Home` component to be visible to users on the home page and not to those who have navigated to `/sign-up`? By using RR's `exact` prop on the first route, you can ensure that the route will match _only if the current URL is an exact match_.
+```js
+ <Route exact path='/'>
+   <Home />
+ </Route>
+ ```
+ 7. Now, when a user visits '/', the `Home` component will render. But when a user visits '/sign-up', only the second route will match and only the `SignUp` component will render.  
 
 ### Checkpoints Summary
-
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
-1. Checkpoint one
-2. Checkpoint two
+1. Learner will use a combination of `Switch` and `exact` to make a buggy router behave as desired.
 
 #### What is the purpose of these checkpoints?
-
+To cement the learner's understanding of `Switch` and exact and to give learners the chance practice reasoning about and modifying the structure of a router to achieve a specific set of goals.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
-
+Code editor and web browser.
 
 ## Exercise # 8: _Nested routes_
 
@@ -248,7 +251,6 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 ### Narrative Summary
 
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
 
 
 ### Checkpoints Summary
