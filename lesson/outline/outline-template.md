@@ -325,41 +325,34 @@ _Check out the [content standards](http://curriculum-documentation.codecademy.co
 1. If you take anything away from this lesson, it should be that RR treats everything as a component. To get fully comfortable using RR in your code, you have to embrace this idea and the declarative coding style that follows from it. For the most part, this is pretty intuitive, but it can feel a bit counterintuitive when it comes to redirecting users.
 2. Consider a common case for redirecting a user: a user wants to access a page that requires authentication, but is not currently signed in.
 3. Walk through the declarative way to to accomplish redirect: the component receives a boolean prop signifying whether the user is logged in and the component renders a `Redirect` if they are not.
-4. Compare that to an imperative redirect. Eg. after a form form is submitted, redirect using `history.push`. It's possible to do this declaratively (add state to the component that updates when the form is submitted, use this state to conditionally render a `Redirect`), but adding that state introduces additional complexity, so being imperative might be fine in this instance. _NOTE: I would be interested in discussing this with John. My personal preference is to avoid adding state purely for the purpose of being able to do declarative redirects, but people have *feelings* about stylistic consistency, so..._
+4. For contrast, walk the user through the imperative way to redirect. Eg. introduce the `useHistory` hook and after a form form is submitted, redirect using `history.push`. It's possible to do this declaratively (add state to the component that updates when the form is submitted, use this state to conditionally render a `Redirect`), but adding that state introduces additional complexity, so being imperative might be fine in this instance. _NOTE: I would be interested in discussing this with John. My personal preference is to avoid adding state purely for the purpose of being able to do declarative redirects, but people have *feelings* about stylistic consistency, so..._
 
 ### Checkpoints Summary
-
 _Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
-1. Checkpoint one
-2. Checkpoint two
+1. Render a `Redirect` and test it in the browser
+2. Write an imperative redirect using `history.push` in an event handler.
 
 #### What is the purpose of these checkpoints?
-
-
+Make sure learners are comfortable with imperative and declarative redirects.
 
 ### What would you like to have in the workspace for this exercise? Share your plan below.
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/workspaces/) for guidance on writing narratives for exercises._
+Code editor and web browser.
 
 ## Exercise # 10: _`useHistory` and the history API_
 
 ### Which course outcomes will be covered by this exercise?
 
-1. Learners will be able to...
+1. Learners will be able to use the `useHistory` hook and the history API to navigate forward and backward through a user's browser history.
 
 ### Narrative Summary
-
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/narrative/) for guidance on writing narratives for exercises._
-
-
+1. Walk the user through the html5 history API.
+2. Explain why you might want to use history, common features eg. forward and back buttons, keeping track of previously viewed pages, etc.
+3. Show how to import and use the hook and call some of the methods on the history object.
 
 ### Checkpoints Summary
 
-_Check out the [content standards](http://curriculum-documentation.codecademy.com/Content-Standards/checkpoint/) for guidance on writing narratives for exercises._
-
-1. Checkpoint one
-2. Checkpoint two
+1. Connect a "back" button to the history API (`goBack`) and test it in the browser.
+2. Connect a "forward" button to the history API (`goForward`) and test it in the browser.
 
 #### What is the purpose of these checkpoints?
 
