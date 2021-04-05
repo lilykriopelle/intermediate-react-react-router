@@ -49,7 +49,7 @@ A diagram of URL structure – protocol/domain/path.
 ### Narrative Summary
 
 1. Walk through multipage architecture: GET to different paths would request different HTML from the server, and that HTML would be displayed in the browser. Whenever a page loadsm the existing HTML is wiped out and replaced, causing a distracting flash of the screen and a clunky experience. 
-2. Single page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markdown and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markdown on the page. Because this set-up does not require the server to produce new HTML, it eliminates that annoying flash that occurs whenever a page reloads.     
+2. Single page architecture (SPA), on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markup and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markup on the page. These partial changes do not require a full page load.
 3. React Router is the most popular solution for implementing routing in single page React applications. The library provides a few simple tools for displaying different components to the user based on the URLs they visit. 
 
 ### Checkpoints Summary
