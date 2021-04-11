@@ -15,8 +15,8 @@ Routing is the process of matching a URL–or Uniform Resource Loader–to the i
 To understand how routing works, it is helpful to review the basic structure of URLs. URLs consist of several components, some of which are mandatory and some of which are optional. The  basic components that make up a URL are:
   1. The scheme (eg. `HTTP`, `HTTPS`, `mailto`, etc), which specifies what protocol should be used to access the resource
   2. The domain (eg. `codecademy.com`), which specifies what website hosts the resource  
-  3. The path (eg. `/learn/paths/front-end-engineer-career-path`), which identifies the specific resource to which the URL corresponds.
-  4. The query string (eg. ?search=react) _TO DO_
+  3. The path (eg. `/search`), which identifies the specific resource to which the URL corresponds.
+  4. The query string (eg. `?query=react`), which appears after a '?' and assigns values to parameters. Common uses of query strings include search parameters and filters.
 
 When a user enters a URL in the browser, the browser matches the URL's domain name to an IP address and sends a request to that IP address using the specified protocol.
 
@@ -60,6 +60,7 @@ npm install --save react-router-dom
 Once you have added the package to your project, you will need to import `BrowserRouter`. `BrowserRouter` is the top-level component responsible for containing routing logic.
 
 React Router provides several routers (the differences between them and the reasons you might choose one over the other are outside the scope of this lesson, but you can read more about that [here](https://reactrouter.com/web/api/BrowserRouter)), and it is common to alias them to `<Router>` for the sake of simplicity and readability. You can alias `BrowserRouter` like so:
+
 ```js
 import { BrowserRouter as Router} from ‘react-router-dom’
 ```
@@ -101,9 +102,7 @@ export default function App () {
 }
 
 ```
-_TO DO: Go into a little bit more detail about what happens when you render a router, eg. just like in the rest of React, parent components (in this case, Router) pass their props to child components. Making `<Router>` the top-level component ensures you can use the router's history from anywhere within your app._
-
-_TO DO: Talk about the [html5 history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)._
+Making `<Router>` the top-level component prevents URL changes from causing page reloads. When you render a `Router` as your top-level component, URL changes cause the `Router` component to responds by passing its props (including information about the current URL's path) to its child components.
 
 ### Instructions:
 
@@ -154,9 +153,7 @@ To create a link to a particular route, render a `Link` component and set its `t
  <Link to='/about' />
 ```
 
-However, React Router also allows you to provide this location as a function or object, which can be useful if you need to programatically generate the location.
-
-_TO DO example_
+However, React Router also allows you to provide this location as a [function](https://reactrouter.com/web/api/Link/to-function) or [object](https://reactrouter.com/web/api/Link/to-object), which can be useful if you need to programatically generate the location.
 
 Why should use `Link` instead of the native `a` tag? React Router's `Link` component wraps the native `a` tag you are familiar with, but prevents its default behavior (navigating to the specified path and causing a page reload – the very thing we are trying to avoid with front-end routing).
 
@@ -318,7 +315,7 @@ Let's return to our newspaper example, and imagine that the engineering team is 
 </Switch>
 ```
 
-There's nothing wrong with this way of routing, but as soon as your start to introduce more features into your application, you may find that having all the routes contained in a single router becomes a bit unwieldly _show a router with articles/categories/log in/etc_. The way around this is to get comfortable rendering routes from components elsewhere in your app.
+There's nothing wrong with this way of routing, but as soon as you start to introduce more features into your application, you may find that having all the routes contained in a single router becomes a bit unwieldly. The way around this is to get comfortable rendering routes from components elsewhere in your app.
 
 For example, consider this `Categories` component, which iterates through a list of categories and links to each:
 
@@ -343,6 +340,8 @@ Clicking on a link rendered in this component will cause the URL to change; it w
 Because React Router handles routing dynamically (eg. routes exist when they are rendered), you can relocate the route to the components in which they are relevant.
 
 ```js
+import { Link, Route } from 'react-router-dom'
+
 function Categories ({ categories }) {
   return (
     <div>
@@ -363,7 +362,7 @@ function Categories ({ categories }) {
 }
 ```
 
-Rewriting your routes this way makes it very obvious what will happen when the user clicks on a link. It also allows us to clean up our top-level router by removing the
+Rewriting your routes this way makes it very obvious what will happen when the user clicks on a link. It also allows us to clean up our top-level router by removing the route for an individual category.
 
 ```js
 <Switch>
@@ -373,7 +372,36 @@ Rewriting your routes this way makes it very obvious what will happen when the u
 </Switch>
 ```
 
-_TO DO iterate on the above example using `match` `path` and `url` to clean up and generalize_
+One potential downside of refactoring your applications this way is that changes to your route structure in one file might have ramifications for routes in other files. For example, suppose we wanted to change all `'/categories'` routes to `'/topics'`. In our existing set up, we would have to remember to change not only the top-level `'/categories'` route, but also change the `'/categories'` segments in the `Categories` component.
+
+React Router provides a hook, `useRouteMatch()` that makes it easy to build relative route paths, creating more generalized and flexible code. Use the `url` property on the object returned by `useRouteMatch()` for creating relative links, and the `path` property for creating relative paths like so:
+
+```js
+import { Link, Route, useRouteMatch } from 'react-router-dom'
+
+function Categories ({ categories }) {
+  let { path, url } = useRouteMatch()
+
+  return (
+    <div>
+      <ul>
+        {
+          categories.map(c =>
+            <li>
+              <Link to={`${url}/${c.name}`}>{c.name}</Link>
+            </li>
+          )
+        }
+       </ul>
+       <Route path={`${path}/:categoryName`}>
+        <Category />
+       </Route>
+     </div>
+  )
+}
+```
+
+By removing the hard-coded `'/categories'` from the links and routes in our `Categories`, we ensure that they will work whatever path caused the `Categories` component to render.
 
 ### Instructions:
 
@@ -381,16 +409,39 @@ _TO DO iterate on the above example using `match` `path` and `url` to clean up a
 
 Hint: Import the necessary React Router components in **Articles.js** and render a `Route` with the appropriate path.
 
-## Exercise 11: _`Redirect` and `useHistory`_
+## Exercise 11: _`Redirect`_
 
 ### Narrative:
 If you take anything away from this lesson, it should be that React Router treats everything as a component. To get fully comfortable using React Router in your code, you have to embrace this idea and the declarative coding style that follows from it. For the most part, this is pretty intuitive, but it can feel a bit counterintuitive when it comes to redirecting users.
 
-Consider a common case for redirecting a user: a user wants to access a page that requires authentication, but is not currently signed in.
+To appreciate the declarative pattern, consider a common case for redirecting a user: a user wants to access a page that requires authentication, but is not currently signed in.
 
-Walk through the declarative way to to accomplish redirect: the component receives a boolean prop signifying whether the user is logged in and the component renders a `Redirect` if they are not.
+```js
+import { Redirect } from 'react-router-dom'
 
-_TO DO_ For contrast, walk the user through the imperative way to redirect. Eg. introduce the `useHistory` hook and after a form form is submitted, redirect using `history.push`. It's possible to do this declaratively (add state to the component that updates when the form is submitted, use this state to conditionally render a `Redirect`), but adding that state introduces additional complexity, so being imperative might be fine in this instance. _NOTE: I would be interested in discussing this with John. My personal preference is to avoid adding state purely for the purpose of being able to do declarative redirects, but people have *feelings* about stylistic consistency, so..._
+const UserProfile = ({ loggedIn }) => {
+  if (loggedIn) {
+    return (
+      // ... user profile contents here
+    )
+  }
+
+  <Redirect to='/' />
+}
+```
+
+React Router also provides the option to redirect imperatively. You might choose to do this if you are working on an existing codebase where it is the norm, or to avoid adding local state to a component whose only purpose is to conditionally render a `Redirect`.
+
+One scenario in which you might choose to redirect imperatively is after a form submission. It is common to redirect after successfully submitting a form, and while it would be possible to do this declaratively (by adding some local state that is `false` until the form has been submitted and then becomes `true`), a simple solution is to imperatively redirect in the event handler that submits the form.
+
+To redirect imperatively, you will need access to the router's `history` object so that you can trigger a change to the current URL. React Router provides a hook, `useHistory()` that returns a [`history`](https://reactrouter.com/web/api/history) object. To update the URL, call the history object's  `push` function and pass it the path to which you want to navigate like so:
+
+```js
+  const onSubmit => (e) => {
+    postArticle({ /* form data */ })
+    history.push('/articles')
+  }
+```
 
 ### Instructions:
 
@@ -402,10 +453,10 @@ Hint:
 
 Hint:
 
-## Exercise 12: _`Redirect` and `useHistory`_
+## Exercise 12: More on `useHistory`
 
 ### Narrative:
-1. _TO DO_ Walk the user through the html5 history API.
+1. _TO DO: Talk about the [html5 history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)._
 2. _TO DO_ Explain why you might want to use history, common features eg. forward and back buttons, keeping track of previously viewed pages, etc.
 3. _TO DO_ Show how to import and use the hook and call some of the methods on the history object.
 
