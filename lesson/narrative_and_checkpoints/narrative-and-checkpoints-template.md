@@ -135,11 +135,15 @@ If your router includes a `Route` with no `path` prop, then that route will alwa
 
 1. Navigate to **App.js**, which currently renders an empty `Router` and imports an `Articles` component. Inside the `Router` component, add a route that matches the path `'/articles'` and renders the `Articles` component.
 
-Hint: _Insert optional but recommended hint text here._
+Hint: Your syntax for adding a route should look something like this:
+
+```js
+<Route path='/your-path-here'>
+  <ChildComponent />
+</Route>
+```
 
 2. In the URL bar, navigate to `'/articles'` to confirm that your code is working. You should see
-
-Hint: _Insert optional but recommended hint text here._
 
 ## Exercise 6: _Linking to routes_
 
@@ -218,13 +222,44 @@ const { nameOfDynamicSegment } = useParams()
 
 ## Exercise 8: _Query Parameters_
 
-### Narrative: _TO DO_
+### Narrative:
+Path parameters (the values assigned to dynamic segments) are used specify resources; they are non-optional parts of the URLs in which they appear. Query parameters, on the other hand, are optional parameters that are most often used to search, sort and/or filter resources.
+
+React Router provides a mechanism for grabbing query parameters' values: the `useLocation` hook, which returns a [`location`](https://reactrouter.com/web/api/location) object whose `search` property corresponds to the current URL's query string.
+
+Passing this string to the native `URLSearchParameters` constructor will yield an object that maps the names of query parameters to their values. Use `useLocation` and `URLSearchParameters` together like so:
+
+```js
+import { useLocation } from 'react-router-dom'
+import { sortAscending, sortDescending } from '../utils'
+
+export const SortedList = (numberList) => {
+  const { search } = useLocation()
+  const queryParams = new URLSearchParams(search)
+  const sortOrder = queryParams.get('order')
+
+  if (sortOrder === 'ASC') {
+    return sortAscending(numberList)
+  } else if (sortOrder === 'DESC') {
+    return sortDescending(numberList)
+  } else {
+    return numberList
+  }
+}
+
+```
 
 ### Instructions:
 
-1.
+1. You're going to add a search feature to the `Articles` page that filters the listed articles by whether or not their titles match the search string. Navigate to **Articles.js**, and use `useLocation` along with `URLSearchParams` to grab the value of the `search` parameter from the query string.  
 
-Hint:
+Hint: Import `useLocation` from `react-router-dom`. Remember, the `useLocation` hook returns an object whose `search` property corresponds to the current URL's query string.
+
+2. Pass that value into the `filterArticles` function we've provided.
+
+Hint: _TO DO_
+
+3.
 
 ## Exercise 9: _`Switch` and `exact`_
 
@@ -302,13 +337,16 @@ Sometimes you may want to leverage React Router's composability and render multi
 </Router>
 ```
 
-Any path will match first route, so the the `Home` component will be rendered whether the user is at '/' or '/sign-up'. _talk a little bit about why this can be useful, eg. for making sure that layout components, menus and such, display no matter what_ But what if you only want the `Home` component to be visible to users on the home page and not to those who have navigated to `/sign-up`? By using React Router's `exact` prop on the first route, you can ensure that the route will match _only if the current URL is an exact match_.
+Any path will match first route, so the the `Home` component will be rendered whether the user is at `'/'` or `'/sign-up'`. This might be ideal behavior if the component rendered by the `'/'` route should display regardless of the current route.
+
+But what if you only want the `Home` component to be visible to users on the home page and not to those who have navigated to `/sign-up`? By using React Router's `exact` prop on the first route, you can ensure that the route will match _only if the current URL is an exact match_.
 
 ```js
  <Route exact path='/'>
    <Home />
  </Route>
- ```
+```
+
 Now, when a user visits '/', the `Home` component will render. But when a user visits '/sign-up', only the second route will match and only the `SignUp` component will render.  
 
 React Router provides a couple of additional props—[`strict`](https://reactrouter.com/web/api/Route/strict-bool) and [`sensitive`](https://reactrouter.com/web/api/Route/sensitive-bool)—on the `Route` component for fine-tuning when a particular route should match.  
@@ -321,7 +359,7 @@ Hint: Import the `Switch` component from `react-router-dom` and wrap the existin
 
 2. You'll notice we've included a route with a `path` of `/`. Currently, this route will match any path. Use the `exact` prop on that route to ensure that the route only matches when the path is exactly equal to `/`.
 
-Hint: `exact` is a boolean prop that is true when it is present and false when it is not.
+Hint: _TO DO: come up with a hint for this that isn't totally obvious, suggestions welcome_
 
 ## Exercise 10: _Nested routes_
 
