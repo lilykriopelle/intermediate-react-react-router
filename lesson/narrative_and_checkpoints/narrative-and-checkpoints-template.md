@@ -157,17 +157,13 @@ However, React Router also allows you to provide this location as a [function](h
 
 Why should use `Link` instead of the native `a` tag? React Router's `Link` component wraps the native `a` tag you are familiar with, but prevents its default behavior (navigating to the specified path and causing a page reload – the very thing we are trying to avoid with front-end routing).
 
-In addition to providing the `Link` component, React Router provides `NavLink` – a special type of link that displays differently depending on whether or not the current URL path matches the `NavLink`'s `to` prop. These can be quite useful for building navigation menus, as they differentiate between active and inactive content, enabling a user to quickly see which content they are viewing.  
+In addition to providing the `Link` component, React Router provides [`NavLink`](https://reactrouter.com/web/api/NavLink) – a special type of link that displays differently depending on whether or not the current URL path matches the `NavLink`'s `to` prop. These can be quite useful for building navigation menus, as they differentiate between active and inactive content, enabling a user to quickly see which content they are viewing.  
 
 ### Instructions:
 
-1. We've expanded new news app to include several additional routes and components. First, navigate to **Article.js**, import the `Link` component from `react-router-dom`, and render a `Link` component with the path `'authors/' + authorName`.
+1. We've expanded new news app to include several additional routes and components. First, navigate to **Article.js** and wrap the author's name with a `Link` component with the path `'authors/' + authorName`.
 
-Hint: _TO DO_
-
-2. Next, navigate to **Sidebar.js**, import `NavLink` from RR and render a `NavLink` component for each of the following paths: `'/articles'`, `'/topics'`, and `'/about'`.
-
-Hint: _TO DO_
+Hint: You will have to import the `Link` component from `react-router-dom`.
 
 ## Exercise 7: _Dynamic routes_
 
@@ -212,7 +208,7 @@ export default function Article() {
 
 Hint: To add a dynamic route, render the `Route` component and make sure that its `path` prop includes a dynamic segment (a segment beginning with a colon).
 
-2. In **Author.js**, import `useParams` from `'react-router-dom'` and use it to get the value of the route param you defined in the previous step. Display this value in between the `h1` tags we've provided.
+2. In **Author.js**, import `useParams` from `'react-router-dom'` and use it to get the value of the route param you defined in the previous step. Display this value in between the `h1` tags we've provided. To test that your code works, navigate to `/authors/ + YOUR_NAME` in the URL bar. You should see your name displayed on the page.
 
 Hint: To get the value of a particular dynamic segment, use destructing assignment like so:
 
@@ -238,15 +234,15 @@ By design, a `Router` will render _all_ the `Routes` whose paths match the curre
 ```js
 <Router>
   <div>
-     <Route path='/articles/new'>
+    <Route path='/articles/new'>
       <NewArticle />
-     </Route>
+    </Route>
     <Route path='/articles/:title'>
       <Article />
-     </Route>
-     <Route path='/articles'>
+    </Route>
+    <Route path='/articles'>
       <Articles />
-     </Route>
+    </Route>
   </div>
 </Router>
 ```
@@ -255,13 +251,43 @@ What should happen when the user navigates to `'articles/new'`? The `NewArticle`
 
 React Router provides several mechanisms for preventing this sort of unintended rendering. The first is the `Switch` component. When wrapped around a collection of routes, `Switch` will render the first of its child routes whose `path` prop matches the current URL.
 
-_TO DO show earlier example wrapped in `Switch` component, walk through what happens when you visit 'articles/new' vs 'articles/title-one'_
+```js
+<Switch>
+  <div>
+    <Route path='/articles/new'>
+      <NewArticle />
+    </Route>
+    <Route path='/articles/:title'>
+      <Article />
+    </Route>
+    <Route path='/articles'>
+      <Articles />
+    </Route>
+  </div>
+</Switch>
+```
 
-Because the `Switch` checks routes sequentially, the order in which Routes are rendered matters.
+Because the `Switch` checks routes sequentially, the order in which Routes are rendered matters. Consider a similar example but with the order of the routes reversed:
 
-_TO DO show the same example with routes reversed, explain that now you will never be able to render the `NewArticle` component since the `Switch` will always render the first Route that matches the current URL_  
+```js
+<Switch>
+  <div>
+    <Route path='/articles/:title'>
+      <Article />
+    </Route>
+    <Route path='/articles/new'>
+      <NewArticle />
+    </Route>
+    <Route path='/articles'>
+      <Articles />
+    </Route>
+  </div>
+</Switch>
+```
 
-Sometimes you may want to leverage RR's composability and render multiple routes simultaneously (this would prevent you from using a `Switch` component) while also ensuring your router distinguishes between static paths and paths including URL parameters. Consider the following example:
+Now imagine that a user navigates to `'/articles/new'`. The `Switch` renders the first route with a matching path, `'/articles/new'` matches `'/articles/:title'`, since `:title` is a dynamic segment. With the routes listed in this order, the `NewArticle` component will never render. In general, you can avoid this problem by listing routes from most- to least-specific.
+
+Sometimes you may want to leverage React Router's composability and render multiple routes simultaneously (this would prevent you from using a `Switch` component) while also ensuring your router distinguishes between static paths and paths including URL parameters. Consider the following example:
 
 ```js
 <Router>
@@ -276,7 +302,7 @@ Sometimes you may want to leverage RR's composability and render multiple routes
 </Router>
 ```
 
-Any path will match first route, so the the `Home` component will be rendered whether the user is at '/' or '/sign-up'. _talk a little bit about why this can be useful, eg. for making sure that layout components, menus and such, display no matter what_ But what if you only want the `Home` component to be visible to users on the home page and not to those who have navigated to `/sign-up`? By using RR's `exact` prop on the first route, you can ensure that the route will match _only if the current URL is an exact match_.
+Any path will match first route, so the the `Home` component will be rendered whether the user is at '/' or '/sign-up'. _talk a little bit about why this can be useful, eg. for making sure that layout components, menus and such, display no matter what_ But what if you only want the `Home` component to be visible to users on the home page and not to those who have navigated to `/sign-up`? By using React Router's `exact` prop on the first route, you can ensure that the route will match _only if the current URL is an exact match_.
 
 ```js
  <Route exact path='/'>
@@ -289,13 +315,13 @@ React Router provides a couple of additional props—[`strict`](https://reactrou
 
 ### Instructions:
 
-1. Let's revisit the News app router. If you navigate to `/articles/name-of-article`, you will notice that the `Article` and `Articles` components both render. Use a `Switch` component to ensure that only the `Articles` component renders when you visit `'/articles'` and only the `Article` component renders when you visit `/articles/name-of-article`.
+1. Let's revisit the News app router. If you navigate to `/articles/accessibility-and-html`, you will notice that the `Article` and `Articles` components both render. Use a `Switch` component to ensure that only the `Articles` component renders when you visit `'/articles'` and only the `Article` component renders when you visit `/articles/accessibility-and-html`.
 
-Hint: _TO DO_
+Hint: Import the `Switch` component from `react-router-dom` and wrap the existing routes in a `Switch`.
 
-2. You'll notice we've included a route with a `path` of `/`. This route will match any path. Use the `exact` prop on that route to ensure that the route only matches when the path is exactly equal to `/`.
+2. You'll notice we've included a route with a `path` of `/`. Currently, this route will match any path. Use the `exact` prop on that route to ensure that the route only matches when the path is exactly equal to `/`.
 
-Hint: _TO DO_
+Hint: `exact` is a boolean prop that is true when it is present and false when it is not.
 
 ## Exercise 10: _Nested routes_
 
@@ -306,12 +332,12 @@ Let's return to our newspaper example, and imagine that the engineering team is 
 
 ```js
 <Switch>
-   <Route path='/categories/:categoryName'>
+  <Route path='/categories/:categoryName'>
     <Category />
-   </Route>
-   <Route path='/categories'>
+  </Route>
+  <Route path='/categories'>
     <Categories />
-   </Route>
+  </Route>
 </Switch>
 ```
 
@@ -330,7 +356,7 @@ function Categories ({ categories }) {
           </li>
         )
       }
-     </ul>
+    </ul>
   )
 }
 ```
@@ -354,10 +380,10 @@ function Categories ({ categories }) {
           )
         }
        </ul>
-       <Route path='categories/:categoryName'>
+      <Route path='categories/:categoryName'>
         <Category />
-       </Route>
-     </div>
+      </Route>
+    </div>
   )
 }
 ```
@@ -372,7 +398,7 @@ Rewriting your routes this way makes it very obvious what will happen when the u
 </Switch>
 ```
 
-One potential downside of refactoring your applications this way is that changes to your route structure in one file might have ramifications for routes in other files. For example, suppose we wanted to change all `'/categories'` routes to `'/topics'`. In our existing set up, we would have to remember to change not only the top-level `'/categories'` route, but also change the `'/categories'` segments in the `Categories` component.
+One potential downside of refactoring your applications this way is that changes to your route structure in one file might have ramifications for routes in other files. For example, suppose we wanted to change all instances of `'/categories'` in our routes to `'/topics'`. In our existing set up, we would have to remember to change not only the top-level `'/categories'` route, but also change the `'/categories'` segments in the `Categories` component.
 
 React Router provides a hook, `useRouteMatch()` that makes it easy to build relative route paths, creating more generalized and flexible code. Use the `url` property on the object returned by `useRouteMatch()` for creating relative links, and the `path` property for creating relative paths like so:
 
@@ -401,11 +427,11 @@ function Categories ({ categories }) {
 }
 ```
 
-By removing the hard-coded `'/categories'` from the links and routes in our `Categories`, we ensure that they will work whatever path caused the `Categories` component to render.
+By removing the hard-coded `'/categories'` from the links and routes in our `Categories` component, we ensure that they will work regardless of the path caused the `Categories` component to render.
 
 ### Instructions:
 
-1. Relocate the route that renders the `Article` component into the `Articles` component.
+1. Relocate the route that renders the `Article` component into the `Articles` component (located in **Articles.js**).
 
 Hint: Import the necessary React Router components in **Articles.js** and render a `Route` with the appropriate path.
 
@@ -432,40 +458,58 @@ const UserProfile = ({ loggedIn }) => {
 
 React Router also provides the option to redirect imperatively. You might choose to do this if you are working on an existing codebase where it is the norm, or to avoid adding local state to a component whose only purpose is to conditionally render a `Redirect`.
 
-One scenario in which you might choose to redirect imperatively is after a form submission. It is common to redirect after successfully submitting a form, and while it would be possible to do this declaratively (by adding some local state that is `false` until the form has been submitted and then becomes `true`), a simple solution is to imperatively redirect in the event handler that submits the form.
+One scenario in which you might choose to redirect imperatively is after a form submission. It is common to redirect after successfully submitting a form, and while it would be possible to do this declaratively (by adding some local state that is `false` until the form has been submitted and then becomes `true` and conditionally rendering a `Redirect` based on the value of that state), a simple solution is to imperatively redirect in the event handler that submits the form.
 
-To redirect imperatively, you will need access to the router's `history` object so that you can trigger a change to the current URL. React Router provides a hook, `useHistory()` that returns a [`history`](https://reactrouter.com/web/api/history) object. To update the URL, call the history object's  `push` function and pass it the path to which you want to navigate like so:
+To redirect imperatively, you will need access to the router's `history` object so that you can trigger a change to the current URL. React Router provides a hook, `useHistory()` that returns a [`history`](https://reactrouter.com/web/api/history) object. To update the URL, call the `history` object's  `push` function and pass it the path to which you want to navigate like so:
 
 ```js
-  const onSubmit => (e) => {
-    postArticle({ /* form data */ })
-    history.push('/articles')
-  }
+const onSubmit => (e) => {
+  postArticle({ /* form data */ })
+  history.push('/articles')
+}
 ```
 
 ### Instructions:
 
-1. Render a `Redirect` and test it in the browser,
+1. Let's practice redirecting declaratively and imperatively so that you're comfortable with both conventions. First, let's go the declarative route (we here at Codecademy are not above cheesy puns). Navigate to `'/profile'` in the browser. This route renders a profile component that should only be viewable if there is a user logged in. Alter the component to render a `Redirect` to `'/'` when `loggedIn` is `false`. Test that your code works by refreshing on `'/profile'` and ensuring that you are appropriately redirected.
 
-Hint:
+Hint: You should render the component as-is if `loggedIn` is true, and otherwise render `Redirect` component. You will need to import the `Redirect` component from `react-router-dom`.
 
-2. Write an imperative redirect using `history.push` in an event handler.
+2. Great work! Now let's redirect imperatively. Navigate to **SignUpForm.js** and add an imperative redirect to the event handler that runs when the form submits. After signing up, the user should be redirected to `/profile`. Test that your code works by signing up and ensuring that you are redirected to the profile page (which you can now view since `loggedIn` is now `true`).
 
-Hint:
+Hint: Import the `useHistory` hook from `react-router-dom`, call it to get a `history` object, and use the `history` object's `push` function to redirect the user to `'/profile'`.
 
 ## Exercise 12: More on `useHistory`
 
 ### Narrative:
-1. _TO DO: Talk about the [html5 history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API)._
-2. _TO DO_ Explain why you might want to use history, common features eg. forward and back buttons, keeping track of previously viewed pages, etc.
-3. _TO DO_ Show how to import and use the hook and call some of the methods on the history object.
+Great job! Now that you know how to use the `history` object to redirect, let's explore its other functionality. Internally, the `BrowserRouter`'s `history` object uses the [html5 history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). In brief, browser `history` is a stack that stores the URLs visited by the user and maintains a pointer to the user's current location. This `history` API allows you to navigate through a user's session history and alter the history stack if necessary.
+
+The router's [`history`](https://reactrouter.com/web/api/history) object has its own API with a handful of useful methods and properties that allow you to implement features that rely on session history. Some of the most common features that depend on session history include forward and back buttons.
+
+The `history` object provides useful methods—`goForward()` and `goBack()`— for moving forward or back by one stack entry, and the more general `go(n)`, which moves `n` entries (where positive `n` values are forward and negative `n` values are backward) through history.
+
+To use these methods, you will need to import and use the `useHistory` hook to access the `history` object, and then hook your UI elements up to the relevant `history` methods like so:
+
+```js
+import { useHistory } from `react-router-dom`
+
+export const BackButton = () => {
+  const { history } = useHistory()
+
+  return (
+    <button onClick={() => history.goBack()}>
+      Go Back
+    </button>
+  )
+}
+```
 
 ### Instructions:
 
-1. Connect a "back" button to the history API (`goBack`) and test it in the browser.
+1. We've added forward and back buttons to the application's sidebar, but have not connected them to the `history` API. Navigate to **NavButtons.js** and add an `onClick` handler to the back button that calls the `history` API's `goBack` method.
 
-Hint: _TO DO_
+Hint: You will need to import the `useHistory` hook from `react-router-dom`, call it to access a `history` object, and call the `history` object's `goBack` method when the user clicks the back button.
 
-2. Connect a "forward" button to the history API (`goForward`) and test it in the browser.
+2. Next, add an `onClick` handler to the forward button that calls the `history` API's `goForward` method.
 
-Hint: _TO DO_
+Hint: You will need to import the `useHistory` hook from `react-router-dom`, call it to access a `history` object, and call the `history` object's `goForward` method when the user clicks the back button.
