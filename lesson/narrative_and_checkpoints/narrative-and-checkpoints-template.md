@@ -259,8 +259,6 @@ Hint: Import `useLocation` from `react-router-dom`. Remember, the `useLocation` 
 
 Hint: _TO DO_
 
-3.
-
 ## Exercise 9: _`Switch` and `exact`_
 
 ### Narrative:
