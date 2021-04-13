@@ -8,7 +8,7 @@ _Read the content standards for expectations for [narratives](http://curriculum-
 
 ### Narrative:
 
-In this lesson, you will learn about routing–the process by which a web application determines what content to show a user based on the current URL–as well as React Router–a popular tool for adding routing to React applications. To reinforce your learning, you will add routing to codebase for a news application built with [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app). Before we learn about routing in the specific context of React applications, it's important to understand how routing works in general.
+In this lesson, you will learn about routing–the process by which a web application determines what content to show a user based on the current URL–as well as React Router–a popular tool for adding routing to React applications. To reinforce your learning, you will add routing to codebase for a tech news application built with [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app). Before we learn about routing in the specific context of React applications, it's important to understand how routing works in general.
 
 Routing is the process of matching a URL–or Uniform Resource Loader–to the information that that URL ought to provide. By organizing an application's content and displaying only what the user has requested to see, routing allows for rich, engaging, and clear user experiences
 
@@ -165,14 +165,14 @@ In addition to providing the `Link` component, React Router provides [`NavLink`]
 
 ### Instructions:
 
-1. We've expanded new news app to include several additional routes and components. First, navigate to **Article.js** and wrap the author's name with a `Link` component with the path `'authors/' + authorName`.
+1. We've expanded the tech news application to include several additional routes and components. First, navigate to **Article.js** and wrap the author's name with a `Link` component with the path `'authors/' + authorName`.
 
 Hint: You will have to import the `Link` component from `react-router-dom`.
 
 ## Exercise 7: _Dynamic routes_
 
 ### Narrative:
-So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a news site in which every article has is accessible at the path (`'/articles/'` + title). There is no way for us to specify a route for each unique article without knowing every single title, nor should we specify a unique route for every article because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level with a route will match any path of the form `'/articles/'` + title.
+So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a tech news site in which every article has is accessible at the path (`'/articles/'` + title). There is no way for us to specify a route for each unique article without knowing every single title, nor should we specify a unique route for every article because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level with a route will match any path of the form `'/articles/'` + title.
 
 React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/articles/:title'`, `:title` is dynamic: `'/articles/article-one'` should display the article with title `'article-one'` and `'/articles/article-two'` should display the article with title `'article-two`. A URL can have multiple dynamic segments (eg. `'/articles/:title/comments/:commentId'`) or none (eg. `'articles'`).
 
@@ -351,7 +351,7 @@ React Router provides a couple of additional props—[`strict`](https://reactrou
 
 ### Instructions:
 
-1. Let's revisit the News app router. If you navigate to `/articles/accessibility-and-html`, you will notice that the `Article` and `Articles` components both render. Use a `Switch` component to ensure that only the `Articles` component renders when you visit `'/articles'` and only the `Article` component renders when you visit `/articles/accessibility-and-html`.
+1. Let's revisit the tech news application's router. If you navigate to `/articles/accessibility-and-html`, you will notice that the `Article` and `Articles` components both render. Use a `Switch` component to ensure that only the `Articles` component renders when you visit `'/articles'` and only the `Article` component renders when you visit `/articles/accessibility-and-html`.
 
 Hint: Import the `Switch` component from `react-router-dom` and wrap the existing routes in a `Switch`.
 
@@ -364,7 +364,7 @@ Hint: _TO DO: come up with a hint for this that isn't totally obvious, suggestio
 ### Narrative:
 Up to this point, we have been working with routers that are small enough to be rendered entirely in a single file. But as an application grows in scope, it can be useful to render routes from multiple components. This allows us to locate routing logic near the related UI logic – you can imagine that on large code bases, it can be advantageous to have code organized this way. Splitting routes up this way also makes an application more lightweight – if a user never navigates to a part of the application that necessitates a route to render, then it never will.
 
-Let's return to our newspaper example, and imagine that the engineering team is building out a `Categories` feature that will organize news articles by their category – world news, U.S. news, etc. In addition to a `Categories` component (which will render links to each individual category), the team has created a `Category` view that will display all the articles for a given category. Previously, we might have written a router like this:
+Let's return to our tech news website example, and imagine that the engineering team is building out a `Categories` feature that will organize tech news articles by their category – front end, back end, mobile development, etc. In addition to a `Categories` component (which will render links to each individual category), the team has created a `Category` view that will display all the articles for a given category. Previously, we might have written a router like this:
 
 ```js
 <Switch>
