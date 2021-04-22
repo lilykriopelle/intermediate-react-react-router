@@ -35,7 +35,7 @@ Hint:
 ## Exercise 2: _Single vs. Multi-Page Architecture_
 
 ### Narrative:
-React Router emerged as a tool for adding routing to Single Page Applications (SPAs). But what exactly is a SPA and why would you want to create one? To answer that question, it's helpful to understand the predecessors to SPAs: multi-page applications.
+React Router emerged as a tool for adding routing to **S**ingle **P**age **A**pplications (SPAs). But what exactly is a SPA and why would you want to create one? To answer that question, it's helpful to understand the predecessors to SPAs: multi-page applications.
 
 In a multi-page application, different pages correspond to different HTML files. When the browser requests a new page, the server responds with new HTML. To load the new page, the browser wipes out the existing HTML and replaces it, causing a distracting flash of the screen and a clunky experience.
 
