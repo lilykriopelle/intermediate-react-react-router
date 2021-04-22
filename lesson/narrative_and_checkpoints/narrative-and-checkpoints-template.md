@@ -434,7 +434,7 @@ Rewriting your routes this way makes it very obvious what will happen when the u
 </Switch>
 ```
 
-One potential downside of refactoring your applications this way is that changes to your route structure in one file might have ramifications for routes in other files. For example, suppose we wanted to change all instances of `'/categories'` in our routes to `'/topics'`. In our existing set up, we would have to remember to change not only the top-level `'/categories'` route, but also change the `'/categories'` segments in the `Categories` component.
+One potential downside of refactoring your applications this way is that changes to your route structure in one file might have ramifications for routes in other files. For example, suppose we wanted to change all instances of `'/categories'` in our routes to `'/topics'`. In our existing set up, we would have to remember to change not only the top-level `'/categories'` route, but also the `'/categories:categoryName'` sub-routes in the `Categories` component.
 
 React Router provides a hook, `useRouteMatch()` that makes it easy to build relative route paths, creating more generalized and flexible code. Use the `url` property on the object returned by `useRouteMatch()` for creating relative links, and the `path` property for creating relative paths like so:
 
