@@ -51,7 +51,7 @@ React Router is the most popular solution for implementing routing in single pag
 
 <hr>
 
-## Exercise 3: _Installing `react-router-dom` and importing `BrowserRouter`_
+## Exercise 3: Installing React Router
 
 ### Narrative:
 In order to use React Router, you will need to include the [`react-router-dom` package](https://www.npmjs.com/package/react-router-dom) (the version of React Router built specifically for web browsers) in your project by using `npm` like so:
