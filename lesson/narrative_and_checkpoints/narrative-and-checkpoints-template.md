@@ -24,7 +24,11 @@ When a user enters a URL in the browser, the browser matches the URL's domain na
 
 1. Checkpoint: Take a moment to examine the URL in your browser's address bar. What is the scheme? The domain? The path? Is there a query string?
 
-Hint: _This will depend on the URL of the course, let me know if that's a no-go for maintainability reasons and I can just replace this with the text from the URL diagram in the LE._
+Hint: 
+* The scheme is `https`
+* The domain is `www.codecademy.com`
+* The path is `/courses/learn-redux/lessons/core-concepts-in-redux/exercises/review
+* There are no query parameters
 
 <hr>
 
