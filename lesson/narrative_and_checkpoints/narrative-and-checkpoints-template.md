@@ -60,9 +60,9 @@ In order to use React Router, you will need to include the [`react-router-dom` p
 npm install --save react-router-dom
 ```
 
-Once you have added the package to your project, you will need to import `BrowserRouter`. `BrowserRouter` is the top-level component responsible for containing routing logic.
+Once you have added `react-router-dom` to your project, you can import one of its router components to add routing to your project. React Router provides several router components however the most common one is the `BrowserRouter`. The other option and the reasons you might choose one over the other are outside the scope of this lesson, but you can read more about that [here](https://reactrouter.com/web/api/BrowserRouter).
 
-React Router provides several routers (the differences between them and the reasons you might choose one over the other are outside the scope of this lesson, but you can read more about that [here](https://reactrouter.com/web/api/BrowserRouter)), and it is common to alias them to `<Router>` for the sake of simplicity and readability. You can alias `BrowserRouter` like so:
+For the sake of simplicity and readability, it is common to alias `BrowserRouter` as `Router` when importing, like so:
 
 ```js
 import { BrowserRouter as Router} from ‘react-router-dom’
