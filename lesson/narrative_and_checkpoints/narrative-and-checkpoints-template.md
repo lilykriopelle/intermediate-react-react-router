@@ -93,9 +93,6 @@ To add routing to your app, simply render a `Router` component as the top level 
 
 ```js
 import { BrowserRouter as Router} from ‘react-router-dom’
-
-
-
 export default function App () {
   return (
     <Router>
