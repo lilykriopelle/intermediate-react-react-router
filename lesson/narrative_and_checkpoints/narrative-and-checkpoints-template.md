@@ -89,7 +89,7 @@ Now that you've imported a `Router`, what do you do with it? The answer might su
 
 Whereas other routing paradigms are static (eg. routes are predefined prior to and separate from the process of rendering), [React Router's philosophy](https://reactrouter.com/web/guides/philosophy) is declarative and dynamic. This means that routes come into being when they are rendered. While this might seem more complicated than configuring your routes statically, it's also more flexible, because your application's route structure can evolve based on user interactions and changing state.
 
-To add routing to your app, simply render a Router as the top level component. In the `render` of your App component in **App.js**, wrap your applications's contents in a `Router` component:
+To add routing to your app, simply render a `Router` component as the top level component. In the `render` of your App component in **App.js**, wrap your applications's contents in a `Router` component:
 
 ```js
 import { BrowserRouter as Router} from ‘react-router-dom’
