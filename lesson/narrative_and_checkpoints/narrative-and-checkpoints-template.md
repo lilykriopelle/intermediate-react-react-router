@@ -74,7 +74,7 @@ import { BrowserRouter as Router} from ‘react-router-dom’
 
 Hint: Use `npm install --save` to add the package to your project.
 
-2. Checkpoint: In **App.js** import `BrowserRouter`_ from `react-router-dom` and alias it to `Router`.
+2. Checkpoint: In **App.js** import `BrowserRouter` from `react-router-dom` and alias it to `Router`.
 
 Hint: Your syntax should look something like this:
 
