@@ -39,7 +39,7 @@ React Router emerged as a tool for adding routing to **S**ingle **P**age **A**pp
 
 In a multi-page application, different pages correspond to different HTML files. When the browser requests a new page, the server responds with new HTML. To load the new page, the browser wipes out the existing HTML and replaces it, causing a distracting flash of the screen and a clunky experience.
 
-Single page architecture (SPA), on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markup and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markup on the page. These partial changes do not require a full page load.
+Single-page architecture, on the other hand, leverages the power of Javascript to dynamically manipulate the DOM. In a SPA, when the user navigates to a new page, Javascript produces new markup and renders it in the browser. If necessary, the application asynchronously fetches data in the background and inserts into the markup on the page. These partial changes do not require a full page load.
 
 Client-side routing and server-side routing generally coexist: client-side routing determines what view to display in the browser, while server-side routing determines what information to send from the server to the client in response to a particular request. Adding client-side routing to an application does not eliminate the need for server-side routing, but it does allow the client to display different HTML for different routes without having to fetch that HTML from the server.
 
