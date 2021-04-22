@@ -13,7 +13,7 @@ In this lesson, you will learn what routing is as well as how to add routing to 
 Routing is the process by which a web application determines what content to show a user based on the current **U**niform **R**esource **L**oader (URL). By organizing an application's content and displaying only what the user has requested to see, routing allows for rich, engaging, and clear user experiences
 
 To understand how routing works, it is helpful to review the basic structure of URLs. URLs consist of several components, some of which are mandatory and some of which are optional. The  basic components that make up a URL are:
-  1. The scheme (eg. `HTTP`, `HTTPS`, `mailto`, etc), which specifies what protocol should be used to access the resource
+  1. The scheme (eg. `HTTP`, `HTTPS`, `mailto`, etc), which specifies what [protocol](https://www.codecademy.com/articles/http-requests) should be used to access the resource
   2. The domain (eg. `codecademy.com`), which specifies what website hosts the resource  
   3. The path (eg. `/search`), which identifies the specific resource to which the URL corresponds.
   4. The query string (eg. `?query=react`), which appears after a '?' and assigns values to parameters. Common uses of query strings include search parameters and filters.
