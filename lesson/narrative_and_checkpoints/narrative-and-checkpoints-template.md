@@ -102,7 +102,7 @@ export default function App () {
 }
 
 ```
-Making `<Router>` the top-level component prevents URL changes from causing page reloads. When you render a `Router` as your top-level component, URL changes cause the `Router` component to responds by passing its props (including information about the current URL's path) to its child components.
+Making `Router` the top-level component prevents URL changes from causing page reloads. When you render a `Router` as your top-level component, URL changes cause the `Router` component to respond by passing information about the current URL's path to its child components as props.
 
 ### Instructions:
 
