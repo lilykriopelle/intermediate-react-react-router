@@ -8,9 +8,9 @@ _Read the content standards for expectations for [narratives](http://curriculum-
 
 ### Narrative:
 
-In this lesson, you will learn about routing–the process by which a web application determines what content to show a user based on the current URL–as well as React Router–a popular tool for adding routing to React applications. To reinforce your learning, you will add routing to codebase for a tech news application built with [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app). Before we learn about routing in the specific context of React applications, it's important to understand how routing works in general.
+In this lesson, you will learn what routing is as well as how to add routing to your React applications with React Router. To reinforce your learning, you will add routing to the codebase for a tech news application built with [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app). Before we learn about routing in the specific context of React applications, it's important to understand how routing works in general.
 
-Routing is the process of matching a URL–or Uniform Resource Loader–to the information that that URL ought to provide. By organizing an application's content and displaying only what the user has requested to see, routing allows for rich, engaging, and clear user experiences
+Routing is the process by which a web application determines what content to show a user based on the current **U**niform **R**esource **L**oader (URL). By organizing an application's content and displaying only what the user has requested to see, routing allows for rich, engaging, and clear user experiences
 
 To understand how routing works, it is helpful to review the basic structure of URLs. URLs consist of several components, some of which are mandatory and some of which are optional. The  basic components that make up a URL are:
   1. The scheme (eg. `HTTP`, `HTTPS`, `mailto`, etc), which specifies what protocol should be used to access the resource
