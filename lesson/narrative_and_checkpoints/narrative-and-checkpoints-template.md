@@ -22,8 +22,7 @@ When a user enters a URL in the browser, the browser matches the URL's domain na
 
 ### Instructions:
 
-1. Checkpoint: Take a moment to examine the URL in your browser's address bar. What is the scheme?
-The domain? The path?
+1. Checkpoint: Take a moment to examine the URL in your browser's address bar. What is the scheme? The domain? The path? Is there a query string?
 
 Hint: _This will depend on the URL of the course, let me know if that's a no-go for maintainability reasons and I can just replace this with the text from the URL diagram in the LE._
 
