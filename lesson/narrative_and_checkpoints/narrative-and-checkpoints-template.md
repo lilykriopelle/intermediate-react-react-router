@@ -467,7 +467,7 @@ By removing the hard-coded `'/categories'` from the links and routes in our `Cat
 
 ### Instructions:
 
-1. Relocate the route that renders the `Article` component into the `Articles` component (located in **Articles.js**).
+1. Relocate the `Route` that renders the `Article` component into the `Articles` component (located in **Articles.js**).
 
 Hint: Import the necessary React Router components in **Articles.js** and render a `Route` with the appropriate path.
 
