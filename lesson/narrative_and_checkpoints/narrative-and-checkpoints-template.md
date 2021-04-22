@@ -491,7 +491,7 @@ const UserProfile = ({ loggedIn }) => {
   <Redirect to='/' />
 }
 ```
-
+In this example, when the `UserProfile` component renders, if the `loggedIn` prop is `true`, then the component will render normally. Otherwise, the `Redirect` component will render, sending the user to the `/` page.
 React Router also provides the option to redirect imperatively. You might choose to do this if you are working on an existing codebase where it is the norm, or to avoid adding local state to a component whose only purpose is to conditionally render a `Redirect`.
 
 One scenario in which you might choose to redirect imperatively is after a form submission. It is common to redirect after successfully submitting a form, and while it would be possible to do this declaratively (by adding some local state that is `false` until the form has been submitted and then becomes `true` and conditionally rendering a `Redirect` based on the value of that state), a simple solution is to imperatively redirect in the event handler that submits the form.
