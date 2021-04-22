@@ -463,7 +463,7 @@ function Categories ({ categories }) {
 }
 ```
 
-By removing the hard-coded `'/categories'` from the links and routes in our `Categories` component, we ensure that they will work regardless of the path caused the `Categories` component to render.
+By removing the hard-coded `'/categories'` from the links and routes in our `Categories` component, we ensure that they will work regardless of the path that caused the `Categories` component to render.
 
 ### Instructions:
 
