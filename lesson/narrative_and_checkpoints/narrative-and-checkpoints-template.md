@@ -476,7 +476,7 @@ Hint: Import the necessary React Router components in **Articles.js** and render
 ### Narrative:
 If you take anything away from this lesson, it should be that React Router treats everything as a component. To get fully comfortable using React Router in your code, you have to embrace this idea and the declarative coding style that follows from it. For the most part, this is pretty intuitive, but it can feel a bit counterintuitive when it comes to redirecting users.
 
-To appreciate the declarative pattern, consider a common case for redirecting a user: a user wants to access a page that requires authentication, but is not currently signed in.
+To appreciate the declarative pattern, consider a common case for redirecting a user: a user wants to access a `/profile` page that requires authentication but is not currently signed in.
 
 ```js
 import { Redirect } from 'react-router-dom'
