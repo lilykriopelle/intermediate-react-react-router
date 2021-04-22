@@ -113,7 +113,7 @@ Hint: _Insert optional but recommended hint text here._
 ## Exercise 5: _Basic routing with `<Route>`_
 
 ### Narrative:
-Once you've created a router, you'll need to create the routes themselves. Remember, in React Router everything is a component. To add a route to an app, you need to render a `Route` component by nesting it inside a `Router`.
+Once you've created a `Router`, you can start creating different views, or _routes_, for the various URL paths of your application. Remember, everything in React Router is a component. To add a route to an app, you need to render a `Route` component by nesting it inside a `Router`.
 
 First, import the `Route` component from the `react-router-dom` package like so:
 ```js
