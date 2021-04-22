@@ -85,7 +85,7 @@ import { ComponentName as AliasName } from `name-of-package`
 ## Exercise 4: _Rendering Your `Router`_
 
 ### Narrative:
-Now that you've imported a `Router`, what do you do with it? The answer might surprise you: render it.  In the React Router paradigm, Routers and the Routes they contain are components just like any other. To include them in your application, you will need to render them.
+Now that you've imported a `Router`, what do you do with it? In the React Router paradigm, the different views of your application, also called _routes_, along with the `Router` itself, are just React components. To include them in your application, you will need to render them.
 
 Whereas other routing paradigms are static (eg. routes are predefined prior to and separate from the process of rendering), [React Router's philosophy](https://reactrouter.com/web/guides/philosophy) is declarative and dynamic. This means that routes come into being when they are rendered. While this might seem more complicated than configuring your routes statically, it's also more flexible, because your application's route structure can evolve based on user interactions and changing state.
 
