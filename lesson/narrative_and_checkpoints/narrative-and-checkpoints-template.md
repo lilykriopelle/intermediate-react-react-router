@@ -119,7 +119,7 @@ First, alongside the `BrowserRouter`, import the `Route` component from the `rea
 ```js
 import { BrowserRouter as Router, Route } from `react-router-dom`
 ```
-Next, render a `Route` inside your `Router`. The `Route` component's function is simple: to render its children when the current URL path matches the value of its `path` prop. For example, the following route renders the `About` component when the URL path matches `'about'`.
+Next, render a `Route` inside your `Router`. The `Route` component's function is simple: to render its children when the current URL path matches the value of its `path` prop. For example, the following route renders the `About` component when the URL path matches `'/about'`.
 
 ```js
 <Route path='/about'>
