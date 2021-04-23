@@ -381,7 +381,7 @@ Let's return to our tech news website example, and imagine that the engineering 
 
 There's nothing wrong with this way of routing, but as soon as you start to introduce more features into your application, you may find that having all the routes contained in a single router becomes a bit unwieldly. The way around this is to get comfortable rendering routes from components elsewhere in your app.
 
-For example, consider this `Categories` component, which iterates through a list of categories and links to each:
+For example, consider this `Categories` component, which iterates through a list of categories and creates `Link`s for each category:
 
 ```js
 function Categories ({ categories }) {
