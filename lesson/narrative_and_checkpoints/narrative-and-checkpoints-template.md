@@ -397,9 +397,9 @@ function Categories ({ categories }) {
 }
 ```
 
-Clicking on a link rendered in this component will cause the URL to change; it will match the route from our previously defined router. But note that, from inside this `Categories` component, in order to know which component will be rendered when the URL updates, we have to navigate back to the component file where the routes were defined.
+According to our previously defined router, clicking on a link rendered by this component will cause the URL to change and then match the route `'/categories/:categoryName'`, thus rendering a `Category`. Though this works as intended, note that this resulting logic is completely separated from this `Categories` component. In order to see which component will be rendered when the URL updates we would have to navigate back to the component file where the routes were defined. 
 
-Because React Router handles routing dynamically (eg. routes exist when they are rendered), you can relocate the route to the components in which they are relevant.
+Because React Router handles routing dynamically (eg. routes exist when they are rendered), you can render a `Route` anywhere within your application. In this case, we can relocate the `Route` that renders an individual `Category` component within the `Categories` component where the `Link`s to that route are defined. 
 
 ```js
 import { Link, Route } from 'react-router-dom'
