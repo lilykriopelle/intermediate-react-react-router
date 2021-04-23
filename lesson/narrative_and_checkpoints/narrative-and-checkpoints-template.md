@@ -262,7 +262,9 @@ export const SortedList = (numberList) => {
 
 ### Instructions:
 
-1. You're going to add a search feature to the `Articles` page that filters the listed articles by whether or not their titles match the search string. Navigate to **Articles.js**, and use `useLocation` along with `URLSearchParams` to grab the value of the `search` parameter from the query string.  
+1. You're going to add a search feature to the `Articles` page that filters the listed articles by whether or not their titles match the search string. For example, if the query string is `'?search=react'`, only the articles with `'react'` in the title should be displayed.
+
+Navigate to **Articles.js**, and use `useLocation` along with `URLSearchParams` to grab the value of the `search` parameter from the query string.  
 
 Hint: Import `useLocation` from `react-router-dom`. Remember, the `useLocation` hook returns an object whose `search` property corresponds to the current URL's query string. 
 
