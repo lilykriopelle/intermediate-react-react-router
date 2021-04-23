@@ -372,7 +372,10 @@ Hint: Import the `Switch` component from `react-router-dom` and wrap the existin
 
 2. You'll notice we've included a route with a `path` of `/`. Currently, this route will match any path. Use the `exact` prop on that route to ensure that the route only matches when the path is exactly equal to `/`.
 
-Hint: _TO DO: come up with a hint for this that isn't totally obvious, suggestions welcome_
+Hint: The `exact` prop can be added to any `Route` component like so:
+
+```js
+<Route exact to="path">    
 
 ## Exercise 10: _Nested routes_
 
