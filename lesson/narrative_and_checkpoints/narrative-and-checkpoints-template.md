@@ -228,7 +228,14 @@ const { nameOfParameter } = useParams()
 Path parameters (the values assigned to dynamic segments) are used specify resources; they are non-optional parts of the URLs in which they appear. Query parameters, on the other hand, are optional parameters that are most often used to search, sort and/or filter resources.
 
 React Router provides a mechanism for grabbing query parameters' values: the `useLocation` hook, which returns a [`location`](https://reactrouter.com/web/api/location) object whose `search` property corresponds to the current URL's query string.
+```js
+import { useLocation } from 'react-router-dom'
 
+// When the user visits "https://domain.com/list?order=DESC", this component is rendered
+export const SortedList = (numberList) => {
+  const { search } = useLocation()
+  console.log(search); // Prints "?order=DESC"
+}
 Passing this `search` value to the native `URLSearchParameters` constructor will yield an object that maps the names of query parameters to their values. 
 
 For example, to create a `SortedList` component that uses an `'order'` query parameter to rendered a list of data in ascending order, in descending order, or in its natural order might look like this: 
