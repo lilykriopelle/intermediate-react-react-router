@@ -229,7 +229,9 @@ Path parameters (the values assigned to dynamic segments) are used specify resou
 
 React Router provides a mechanism for grabbing query parameters' values: the `useLocation` hook, which returns a [`location`](https://reactrouter.com/web/api/location) object whose `search` property corresponds to the current URL's query string.
 
-Passing this string to the native `URLSearchParameters` constructor will yield an object that maps the names of query parameters to their values. Use `useLocation` and `URLSearchParameters` together like so:
+Passing this `search` value to the native `URLSearchParameters` constructor will yield an object that maps the names of query parameters to their values. 
+
+For example, to create a `SortedList` component that uses an `'order'` query parameter to rendered a list of data in ascending order, in descending order, or in its natural order might look like this: 
 
 ```js
 import { useLocation } from 'react-router-dom'
