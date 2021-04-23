@@ -360,7 +360,7 @@ But what if you only want the `Home` component to be visible to users on the hom
 
 Now, when a user visits '/', the `Home` component will render. But when a user visits '/sign-up', only the second route will match and only the `SignUp` component will render.  
 
-React Router provides a couple of additional props—[`strict`](https://reactrouter.com/web/api/Route/strict-bool) and [`sensitive`](https://reactrouter.com/web/api/Route/sensitive-bool)—on the `Route` component for fine-tuning when a particular route should match.  
+React Router provides a couple of additional props—[`strict`](https://reactrouter.com/web/api/Route/strict-bool) and [`sensitive`](https://reactrouter.com/web/api/Route/sensitive-bool)—on the `Route` component for fine-tuning when a particular route should match, however, these are used far less frequently than the `exact` prop.  
 
 ### Instructions:
 
