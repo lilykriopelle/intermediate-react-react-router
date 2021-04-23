@@ -219,7 +219,7 @@ Hint: To add a dynamic route, render the `Route` component and make sure that it
 Hint: To get the value of a particular URL parameter, use destructing assignment like so:
 
 ```js
-const { nameOfDynamicSegment } = useParams()
+const { nameOfParameter } = useParams()
 ```
 
 ## Exercise 8: _Query Parameters_
