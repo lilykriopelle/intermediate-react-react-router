@@ -129,7 +129,7 @@ Next, render a `Route` inside your `Router`. The `Route` component's function is
 
 If you navigate to `'/about'`, your URL path will match the route's `path` prop, and the `About` component will render.
 
-If your router includes a `Route` with no `path` prop, then that route will always match. You can leverage this fact to make your applications render components that you want your user to see regardless of the current route (these are often but not always layout components, such as sidebars and navigation bars) by including those components as children of a route with no `path` prop.
+If your router includes a `Route` with no `path` prop, then that route will always match and render. You can leverage this fact to make your application render components that you want your user to see regardless of the current route, such as sidebars and navigation bars.
 
 ### Instructions:
 
