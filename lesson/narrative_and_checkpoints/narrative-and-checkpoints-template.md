@@ -172,7 +172,9 @@ Hint: You will have to import the `Link` component from `react-router-dom`.
 ## Exercise 7: _Dynamic routes_
 
 ### Narrative:
-So far, all the routes we've covered have been static, which means they match a single path. This works for certain types of routes, but not all. For example, imagine a tech news site in which every article has is accessible at the path (`'/articles/'` + title). There is no way for us to specify a route for each unique article without knowing every single title, nor should we specify a unique route for every article because such an approach would be brittle and verbose. What we would rather do is express the pattern at a high level with a route will match any path of the form `'/articles/'` + title.
+So far, all the routes we've covered have been static, which means they match a single unique path. This works for certain types of routes, but not all. 
+
+For example, imagine in a tech news site, every article is accessible at the path `'/articles/' + someTitle` where `someTitle` is different for each article. Specifying a unique route for every article would not only be verbose and time-consuming, it would require an impractical amount of maintenance should the path structure ever change. Instead, we would rather express the pattern at a high level with a single route that can match any path of the form `'/articles/' + someTitle` and still know which article to render.
 
 React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/articles/:title'`, `:title` is dynamic: `'/articles/article-one'` should display the article with title `'article-one'` and `'/articles/article-two'` should display the article with title `'article-two`. A URL can have multiple dynamic segments (eg. `'/articles/:title/comments/:commentId'`) or none (eg. `'articles'`).
 
