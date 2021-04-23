@@ -216,7 +216,7 @@ Hint: To add a dynamic route, render the `Route` component and make sure that it
 
 2. In **Author.js**, import `useParams` from `'react-router-dom'` and use it to get the value of the route param you defined in the previous step. Display this value in between the `h1` tags we've provided. To test that your code works, navigate to `/authors/ + YOUR_NAME` in the URL bar. You should see your name displayed on the page.
 
-Hint: To get the value of a particular dynamic segment, use destructing assignment like so:
+Hint: To get the value of a particular URL parameter, use destructing assignment like so:
 
 ```js
 const { nameOfDynamicSegment } = useParams()
