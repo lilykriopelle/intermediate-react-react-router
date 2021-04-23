@@ -364,7 +364,7 @@ Hint: _TO DO: come up with a hint for this that isn't totally obvious, suggestio
 ## Exercise 10: _Nested routes_
 
 ### Narrative:
-Up to this point, we have been working with routers that are small enough to be rendered entirely in a single file. But as an application grows in scope, it can be useful to render routes from multiple components. This allows us to locate routing logic near the related UI logic – you can imagine that on large code bases, it can be advantageous to have code organized this way. Splitting routes up this way also makes an application more lightweight – if a user never navigates to a part of the application that necessitates a route to render, then it never will.
+Up to this point, we have been working with routers that are small enough to be rendered entirely in a single file. But as an application grows in scope, it can be useful to split up the router and render routes near the related UI logic. Splitting routes up this way also makes an application more lightweight – if a user never navigates to a part of the application that necessitates a route to render, then it never will.
 
 Let's return to our tech news website example, and imagine that the engineering team is building out a `Categories` feature that will organize tech news articles by their category – front end, back end, mobile development, etc. In addition to a `Categories` component (which will render links to each individual category), the team has created a `Category` view that will display all the articles for a given category. Previously, we might have written a router like this:
 
