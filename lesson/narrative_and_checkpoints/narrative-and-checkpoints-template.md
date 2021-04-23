@@ -176,9 +176,9 @@ So far, all the routes we've covered have been static, which means they match a 
 
 For example, imagine in a tech news site, every article is accessible at the path `'/articles/' + someTitle` where `someTitle` is different for each article. Specifying a unique route for every article would not only be verbose and time-consuming, it would require an impractical amount of maintenance should the path structure ever change. Instead, we would rather express the pattern at a high level with a single route that can match any path of the form `'/articles/' + someTitle` and still know which article to render.
 
-React Router allows us to do that by using URL parameters. URL parameters—placeholders beginning with a semicolon (:)—are dynamic segments of a URL that change based on the specific resource the URL is meant to display. For example, in the URL `'/articles/:title'`, `:title` is dynamic: `'/articles/article-one'` should display the article with title `'article-one'` and `'/articles/article-two'` should display the article with title `'article-two`. A URL can have multiple dynamic segments (eg. `'/articles/:title/comments/:commentId'`) or none (eg. `'articles'`).
+React Router allows us to do this by using _URL parameters_ to create _dynamic routes_. URL parameters are dynamic segments of a URL that act as placeholders for more specific resources the URL is meant to display. They appear in a dynamic route as a semicolon (`:`) followed by a variable name and a  single route can have multiple parameters (eg. `'/articles/:title/comments/:commentId'`) or none (eg. `'articles'`).
 
-To create a dynamic route, provide the `Route` component with a `path` prop that includes a dynamic segment. For example, a `Route` whose path has a dynamic title segment and that renders an `Article` component would look like this:
+To create a dynamic route, provide the `Route` component with a `path` prop that includes a URL parameter. For example, a `Route` whose path has a dynamic `title` segment and that renders an `Article` component might look like this:
 
 ```js
 <Route path='/articles/:title'>
