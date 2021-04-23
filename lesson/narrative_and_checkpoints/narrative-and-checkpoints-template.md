@@ -186,7 +186,7 @@ To create a dynamic route, provide the `Route` component with a `path` prop that
 </Route>
 ```
 
-Now, when we navigate to `'/articles/:title`, an `Article` component render.  
+In this example, the dynamic route `'/articles/:title'` contains the URL parameter `:title`. Navigating to `'/articles/article-one'` should display the article with title `'article-one'` and navigating to `'/articles/article-two'` should display the article with title `'article-two` (how the `Article` component knows which article to render will be covered later in this lesson).
 
 It is common to use URL parameters to retrieve and/or display data in the component that a dynamic route renders. For example, the `Article` component might need to display the title of the current article.
 
