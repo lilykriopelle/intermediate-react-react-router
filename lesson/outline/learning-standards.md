@@ -404,5 +404,108 @@ JavaScript, React, React Router
 - This example code was taken from https://reactrouter.com/web/example/nesting
 <hr>
 
+## Redirecting Declaratively with `<Redirect>
 
-`useHistory`and `<Redirect>` learning standards to come...
+### Learning Standard Text
+
+The `<Redirect>` tag is used to force a redirect to the given route using its `to` prop.
+
+### Tags
+
+JavaScript, React, React Router
+
+
+### Additional Notes / Resources Used
+
+Example:
+
+```js
+import { Redirect } from 'react-router-dom'
+ 
+const UserProfile = ({ loggedIn }) => {
+  if (loggedIn) {
+    return (
+      // ... user profile contents here
+    )
+  }
+ 
+  // redirect to the sign-up page.
+  <Redirect to='/sign-up' />
+}
+```
+
+Sources:
+- https://reactrouter.com/web/guides/primary-components/navigation-or-route-changers
+- https://reactrouter.com/web/api/Redirect
+
+<hr>
+
+## The history object and the `useHistory()` hook
+
+### Learning Standard Text
+
+The `useHistory()` hook from by the `react-router-dom` package returns an instance of the `history` object. 
+
+The `history` object has a mutable stack-like structure that keeps track of the user's session history. Notably, it contains the following useful methods 
+* `history.push(location)` - imperatively redirects the user to the specified `location`
+* `go(n)` - Moves the pointer in the history stack by n entries
+* `goBack()` - Equivalent to `go(-1)`
+* `goForward()` - Equivalent to `go(1)`
+
+### Tags
+
+JavaScript, React, React Router
+
+### Additional Notes / Resources Used
+
+Examples:
+
+1. Imperative Redirects:
+```js
+import { useHistory } from `react-router-dom`
+ 
+export const exampleForm = () => {
+ 
+  const history = useHistory()
+ 
+  const handleSubmit = e => {
+    // Submit the form data
+    // Then imperatively redirect
+    history.push('/')
+  }
+ 
+  //...
+ 
+  return (
+    <form onSubmit={handleSubmit}>
+      // form elements
+    </form>
+  )
+}
+```
+
+2. Forward/Back navigation
+
+```js
+import { useHistory } from `react-router-dom`
+ 
+export const ForwardBackNav = () => {
+  const history = useHistory()
+ 
+  return (
+    <nav>
+      <button onClick={() => history.goBack()}>
+        <-
+      </button>
+      <button onClick={() => history.goForward()}>
+        ->
+      </button>
+    </nav>
+  )
+}
+```
+
+Sources
+* https://reactrouter.com/web/api/history
+
+<hr>
