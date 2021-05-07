@@ -1,35 +1,3 @@
-## Single-Page Applications
-
-### Learning Standard Text
-
-Multi-page applications (MPAs) serve distinct HTML files for each new page requested by the user. 
-
-For example, in an MPA, a user who navigates to a `/home` page of a website will be served the `home.html` file. If they were to navigate to the `/about` page, the server will respond by sending back the `about.html` file. 
-
-### Tags
-
-JavaScript, React, React Router
-
-### Additional Notes / Resources Used
-
-<hr>
-
-## Single-Page Applications
-
-### Learning Standard Text
-
-Single-page applications (SPAs) do not require the page to reload in order to access different views of the application. Instead, each view of the application is rendered dynamically on the front-end without the need to request new markdown. Data that affects what is rendered may still be fetched asynchronously from the server. 
-
-In an SPA, all views are rendered from a single file. For example, a user who navigates to the `/home` page will be presented with the "Home" UI and if they navigate to the `/about` page, the view will simply change to the "About" UI.
-
-### Tags
-
-JavaScript, React, React Router
-
-### Additional Notes / Resources Used
-
-<hr>
-
 ## What is React Router?
 
 ### Learning Standard Text
@@ -107,9 +75,19 @@ JavaScript, React, React Router
 
 The `<Route>` component from the `react-router-dom` library creates new "pages" within an application by rendering some UI when its path matches the current URL. 
 
+Unless specified with the `exact` attribute, all `<Route>` components whose `path` matches the beginning of the current URL will be rendered. 
+
+### Tags
+
+JavaScript, React, React Router
+
+
+### Additional Notes / Resources Used
+
+
 In this example, if a user were to navigate to the index page `/`, they would see "Hello World". If they were to navigate to the `/about` page, they would instead see "I'm a React developer!". 
 
-Unless specified with the `exact` attribute, any `<Route>` whose `path` matches the beginning of the current URL will be rendered. In this example, if the `exact` attribute were removed from the first `<Route>` component, both `<h1>` elements would be rendered when the user navigates to `/about`.
+In this example, if the `exact` attribute were removed from the first `<Route>` component, both `<h1>` elements would be rendered when the user navigates to `/about`.
 
 ```js
 // App.js
@@ -132,12 +110,6 @@ export default App = () => {
 }
 ```
 
-### Tags
-
-JavaScript, React, React Router
-
-
-### Additional Notes / Resources Used
 - https://reactrouter.com/web/guides/quick-start
 
 <hr>
@@ -148,18 +120,20 @@ JavaScript, React, React Router
 
 The `<Link>` component from React Router is used to create navigation links in your application. Rendering a `<Link>` in your application will render an anchor (`<a>`) in your HTML document, though the anchor's default behavior of triggering a page reload will be disabled.
 
-
-```js
-<Link to="/about">About</Link>
-// <a href="/about">About</a>
-```
-
 ### Tags
 
 JavaScript, React, React Router
 
 
 ### Additional Notes / Resources Used
+
+Example:
+
+```js
+<Link to="/about">About</Link>
+// Rendered: <a href="/about">About</a>
+```
+
 - https://reactrouter.com/web/guides/primary-components
 <hr>
 
@@ -168,6 +142,15 @@ JavaScript, React, React Router
 ### Learning Standard Text
 
 The `<NavLink>` component from React Router is a special type of `<Link>` that can be assigned an `activeClassName` prop when its `to` prop matches the current location.
+
+### Tags
+
+JavaScript, React, React Router
+
+
+### Additional Notes / Resources Used
+
+Example:
 
 ```js
 <NavLink to="/home" activeClassName="huzzah">
@@ -182,12 +165,6 @@ The `<NavLink>` component from React Router is a special type of `<Link>` that c
 // <a href="/about" className="huzzah">Home</a>
 ```
 
-### Tags
-
-JavaScript, React, React Router
-
-
-### Additional Notes / Resources Used
 - https://reactrouter.com/web/guides/primary-components
 <hr>
 
@@ -199,6 +176,13 @@ JavaScript, React, React Router
 URL parameters are are dynamic segments of a `<Route>` component's `path` prop used by React Router to dynamically serve resources based on the current window location. 
 
 The `useParams()` hook from the `react-router-dom` package can be used to access a URL parameter value from within a component rendered by a `<Route>` with a dynamic URL. 
+
+### Tags
+
+JavaScript, React, React Router
+
+
+### Additional Notes / Resources Used
 
 In this example, the `<Page>` component accesses the `id` URL parameter via the object returned by `useParams()`. If the user were to navigate to `/page1`, the component will render `<h3> ID: page1 </h3>`.
 
@@ -243,13 +227,6 @@ function Page () {
 }
 ```
 
-### Tags
-
-JavaScript, React, React Router
-
-
-### Additional Notes / Resources Used
-
 <hr>
 
 ## Controlling Routes with `<Switch>`
@@ -257,6 +234,12 @@ JavaScript, React, React Router
 ### Learning Standard Text
 
 The `<Switch>` component from the `react-router-dom` library looks through its children `<Route>` components and renders the first one that matches the current URL. 
+
+### Tags
+
+JavaScript, React, React Router
+
+### Additional Notes / Resources Used
 
 In this example, if the user navigates to `/users/123`, then only the `<SingleUser>` component will render. If the `<Switch>` were removed, then both `<SingleUsers>` and `<UsersList>` would render as their `<Route>`s both match the URL.
 
@@ -285,12 +268,6 @@ export default function App() {
 }
 ```
 
-### Tags
-
-JavaScript, React, React Router
-
-
-### Additional Notes / Resources Used
 - https://reactrouter.com/native/api/Switch
 <hr>
 
@@ -298,9 +275,20 @@ JavaScript, React, React Router
 
 ### Learning Standard Text
 
-Since routes are regular React components, they may be rendered anywhere in the app, including in child elements. This helps when it's time to code-split your app into multiple bundles because code-splitting a React Router app is the same as code-splitting any other React app.
+Since routes are regular React components, they may be rendered anywhere in the app, including in child elements. 
 
-The `useRouteMatch()` hook from the `react-router-dom` package may be used access the `match` object which contains `url` and `path` values. The `path` lets us build `<Route>` paths that are relative to the parent route, while the `url` lets us build relative links.
+The `useRouteMatch()` hook from the `react-router-dom` package may be used access the `match` object which contains `url` and `path` values. The `path` is used to build `<Route>` paths that are relative to the parent route, while the `url` is used to build relative `Link` paths.
+
+### Tags
+
+JavaScript, React, React Router
+
+
+### Additional Notes / Resources Used
+
+Example:
+
+This helps when it's time to code-split your app into multiple bundles because code-splitting a React Router app is the same as code-splitting any other React app.
 
 ```js
 import React from "react";
@@ -395,13 +383,8 @@ function Topic() {
 }
 ```
 
-### Tags
-
-JavaScript, React, React Router
-
-
-### Additional Notes / Resources Used
 - This example code was taken from https://reactrouter.com/web/example/nesting
+
 <hr>
 
 ## Redirecting Declaratively with `<Redirect>
