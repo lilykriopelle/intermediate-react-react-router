@@ -2,7 +2,7 @@
 
 ### Learning Standard Text
 
-React Router is a library that provides navigational components for React Developers to create Single-Page Applications (SPAs) with dynamic, client-side routing. Applications that use React-Router can benefit from the separation of content afforded to multi-page applications without the break in the user-experience caused by a new page loading.
+React Router is a library that provides navigational components for React developers to create Single-Page Applications (SPAs) with dynamic, client-side routing. Applications that use React-Router can benefit from the separation of content afforded to multi-page applications without the break in the user experience caused by a new page loading.
 
 ### Tags
 
@@ -173,7 +173,7 @@ Example:
 
 ### Learning Standard Text
 
-URL parameters are are dynamic segments of a `<Route>` component's `path` prop used by React Router to dynamically serve resources based on the current window location. 
+URL parameters are dynamic segments of a `<Route>` component's `path` prop used by React Router to dynamically serve resources based on the current window location. 
 
 The `useParams()` hook from the `react-router-dom` package can be used to access a URL parameter value from within a component rendered by a `<Route>` with a dynamic URL. 
 
@@ -277,7 +277,7 @@ export default function App() {
 
 Since routes are regular React components, they may be rendered anywhere in the app, including in child elements. 
 
-The `useRouteMatch()` hook from the `react-router-dom` package may be used access the `match` object which contains `url` and `path` values. The `path` is used to build `<Route>` paths that are relative to the parent route, while the `url` is used to build relative `Link` paths.
+The `useRouteMatch()` hook from the `react-router-dom` package may be used to access the `match` object which contains `url` and `path` values. The `path` is used to build `<Route>` paths that are relative to the parent route, while the `url` is used to build relative `Link` paths.
 
 ### Tags
 
@@ -432,7 +432,7 @@ The `useHistory()` hook from by the `react-router-dom` package returns an instan
 
 The `history` object has a mutable stack-like structure that keeps track of the user's session history. Notably, it contains the following useful methods 
 * `history.push(location)` - imperatively redirects the user to the specified `location`
-* `go(n)` - Moves the pointer in the history stack by n entries
+* `go(n)` - Navigates the user to the `n`th item in the session history
 * `goBack()` - Equivalent to `go(-1)`
 * `goForward()` - Equivalent to `go(1)`
 
