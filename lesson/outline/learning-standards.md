@@ -24,8 +24,6 @@ To install React Router with `npm`, use the following command:
 npm install react-router-dom
 ```
 
-> Note: An equivalent package called `react-router-native` may be used in order to create a React Native application.
-
 ### Tags
 
 JavaScript, React, React Router
@@ -73,7 +71,7 @@ JavaScript, React, React Router
 
 ### Learning Standard Text
 
-The `<Route>` component from the `react-router-dom` library creates new "pages" within an application by rendering some UI when its path matches the current URL. 
+The `<Route path=''>` component from the `react-router-dom` library creates new "pages" within an application by rendering some UI when its `path` prop matches the current URL. 
 
 Unless specified with the `exact` attribute, all `<Route>` components whose `path` matches the beginning of the current URL will be rendered. 
 
@@ -81,9 +79,9 @@ Unless specified with the `exact` attribute, all `<Route>` components whose `pat
 
 JavaScript, React, React Router
 
-
 ### Additional Notes / Resources Used
 
+This learning standard does not cover URL parameters.
 
 In this example, if a user were to navigate to the index page `/`, they would see "Hello World". If they were to navigate to the `/about` page, they would instead see "I'm a React developer!". 
 
@@ -118,7 +116,9 @@ export default App = () => {
 
 ### Learning Standard Text
 
-The `<Link>` component from React Router is used to create navigation links in your application. Rendering a `<Link>` in your application will render an anchor (`<a>`) in your HTML document, though the anchor's default behavior of triggering a page reload will be disabled.
+The `<Link to=''>` component from React Router is used to create navigation links in your application. Clicking on a link created in this way will change the browser's current location to the URL specified by the `to` prop.
+
+Rendering a `<Link>` in your application will render an anchor (`<a>`) in your HTML document, though the anchor's default behavior of triggering a page reload will be disabled.
 
 ### Tags
 
@@ -141,7 +141,7 @@ Example:
 
 ### Learning Standard Text
 
-The `<NavLink>` component from React Router is a special type of `<Link>` that can be assigned an `activeClassName` prop when its `to` prop matches the current location.
+The `<NavLink to=''>` component from React Router is a special type of `<Link>` that can be assigned an `activeClassName` prop when its `to` prop matches the current location.
 
 ### Tags
 
@@ -406,14 +406,15 @@ Example:
 import { Redirect } from 'react-router-dom'
  
 const UserProfile = ({ loggedIn }) => {
-  if (loggedIn) {
+  if (!loggedIn) {
+    // redirect to the sign-up page.
+    <Redirect to='/sign-up' />
+  }
+  else {
     return (
       // ... user profile contents here
     )
   }
- 
-  // redirect to the sign-up page.
-  <Redirect to='/sign-up' />
 }
 ```
 
