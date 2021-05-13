@@ -25,7 +25,7 @@ The example below shows a nested `Link` and `Route` within the `User` component.
 ```js
 import { Link, Route, Switch, useRouteMatch } from __~'react-router-dom'~__;
 import UserProfile from './UserProfile'
-
+// Rendered for the path `/users/:userId`, e.g. `/users/user123`
 function User() {
   let { path, url } = __~useRouteMatch()~__;
 
